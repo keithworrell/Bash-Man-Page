@@ -17,21 +17,22 @@
 \begin{document}
 
 \maketitle
-
-\section{Name}
+\tableofcontents 
+\section{Introduction}
+\subsection{Name}
 bash - GNU Bourne-Again SHell
 
-\section{Synopsis}
+\subsection{Synopsis}
 \label{sec:synopsis}
 \noindent
 \begin{lstlisting}[language=bash]
   bash [options] [file]
 \end{lstlisting}
 
-\section{Copyright}
+\subsection{Copyright}
 Bash is Copyright \textcopyright 1989-2009 by the Free Software Foundation, Inc.
 
-\section{Description}
+\subsection{Description}
 \label{sec:description}
  
 Bash is an sh-compatible command language interpreter that executes commands read from the standard input or from a file. Bash also incorporates useful features from the Korn and C shells (ksh and csh).
@@ -45,62 +46,82 @@ In addition to the single-character shell options documented in the description 
 \renewcommand{\arraystretch}{2}
 
 % format commands 
-%\newcommand{\ttext}[2]\begin{flushright}{\fontfamily{qcr}\selectfont#1\textit{#2}\end{flushright}}
 \newcommand{\ttext}[2]{\fontfamily{qcr}\selectfont#1\textit{#2}}
+
 \noindent
 \begin{longtable}{p{0.3\textwidth}p{0.65\textwidth}}
 \ttext{-c }{string} & 
 If the -c option is present, then commands are read from string. If there are arguments after the string, they are assigned to the positional parameters, starting with \$0. \\
+
 \ttext{-i}{} & 
 If the -i option is present, the shell is interactive. \\
+
 \ttext{-l}{} & 
-Make bash act as if it had been invoked as a login shell \hyperref[sec:invocation]{(see INVOCATION below)}. \\
+Make bash act as if it had been invoked as a login shell
+\hyperref[sec:invocation]{(see INVOCATION below)}. \\
+
 \ttext{-r}{} & 
-If the -r option is present, the shell becomes restricted (see RESTRICTED SHELL below). \\
+If the -r option is present, the shell becomes restricted \hyperref[sec:restrictedshell]{(see RESTRICTED SHELL below)}. \\
+
 \ttext{-s}{} & 
 If the -s option is present, or if no arguments remain after option processing, then commands are read from the standard input. This option allows the positional parameters to be set when invoking an interactive shell. \\
+
 \ttext{-D}{} & 
 A list of all double-quoted strings preceded by \$ is printed on the standard output. These are the strings that are subject to language translation when the current locale is not C or POSIX. This implies the -n option; no commands will be executed. \\
+
 \ttext{[-+]O [shopt\_option]}{} & 
-shopt\_option is one of the shell options accepted by the shopt builtin (see SHELL BUILTIN COMMANDS below). If shopt\_option is present, -O sets the value of that option; +O unsets it. If shopt\_option is not supplied, the names and values of the shell options accepted by shopt are printed on the standard output. If the invocation option is +O, the output is displayed in a format that may be reused as input. \\
+shopt\_option is one of the shell options accepted by the shopt builtin \hyperref[sec:shellbuiltincommands]{(see SHELL BUILTIN COMMANDS below)}. If shopt\_option is present, -O sets the value of that option; +O unsets it. If shopt\_option is not supplied, the names and values of the shell options accepted by shopt are printed on the standard output. If the invocation option is +O, the output is displayed in a format that may be reused as input. \\
+
 \ttext{--}{} & 
 A -- signals the end of options and disables further option processing. Any arguments after the -- are treated as filenames and arguments. An argument of - is equivalent to --.\newline Bash also interprets a number of multi-character options. These options must appear on the command line before the single-character options to be recognized.\\
+
 \ttext{--debugger}{} & 
-Arrange for the debugger profile to be executed before the shell starts. Turns on extended debugging mode (see the description of the extdebug option to the shopt builtin below) and shell function tracing (see the description of the -o functrace option to the set builtin below).\\
+Arrange for the debugger profile to be executed before the shell starts. Turns on extended debugging mode \hyperref[sec:options]{(see the description of the extdebug option to the shopt builtin below)} and shell function tracing \hyperref[sec:shellbuiltincommands]{(see the description of the -o functrace option to the set builtin below)}.\\
+
 \ttext{--dump-po-strings}{} &
 Equivalent to -D, but the output is in the GNU gettext po (portable object) file format. \\
+
 \ttext{--dump-strings}{} &
 Equivalent to -D. \\
+
 \ttext{--help}{} &
 Display a usage message on standard output and exit successfully.\\
+
 \ttext{--init-file }{file} \newline \ttext{--rcfile }{file}  &
-%\shortstack{--init-file \\ --rcfile}\&
-Execute commands from file instead of the standard personal initialization file \url{~/.bashrc} if the shell is interactive (see INVOCATION below).\\
+Execute commands from file instead of the standard personal initialization file \url{~/.bashrc} if the shell is interactive \hyperref[sec:invocation]{(see INVOCATION below)}.\\
+
 \ttext{--login}{} &
 Equivalent to -l.\\
+
 \ttext{--noediting}{} &
 Do not use the GNU readline library to read command lines when the shell is interactive. \\
+
 \ttext{--noprofile}{} &
-Do not read either the system-wide startup file /etc/profile or any of the personal initialization files \url{~/.bash_profile}, \url{~/.bash_login}, or\url{ ~/.profile}. By default, bash reads these files when it is invoked as a login shell (see INVOCATION below). \\
+Do not read either the system-wide startup file /etc/profile or any of the personal initialization files \url{~/.bash_profile}, \url{~/.bash_login}, or\url{ ~/.profile}. By default, bash reads these files when it is invoked as a login shell \hyperref[sec:invocation]{(see INVOCATION below)}. \\
+
 \ttext{--norc}{} &
 Do not read and execute the personal initialization file ~/.bashrc if the shell is interactive. This option is on by default if the shell is invoked as sh. \\
+
 \ttext{--posix}{} &
 Change the behavior of bash where the default operation differs from the POSIX standard to match the standard (posix mode). \\
+
 \ttext{--restricted}{} &
 The shell becomes restricted (see RESTRICTED SHELL below).\\
+
 \ttext{--rpm-requires}{} &
 Produce the list of files that are required for the shell script to run. This implies '-n' and is subject to the same limitations as compile time error checking checking; Backticks, [] tests, and evals are not parsed so some dependencies may be missed. \\
+
 \ttext{--verbose}{} &
 Equivalent to -v. \\
+
 \ttext{--version}{} &
-Show version information for this instance of bash on the standard output and exit successfully.
+Show version information for this instance of bash on the standard output and exit successfully. \\
 \end{longtable}
-\section{Arguments}
-\label{sec:arguments}
+
+\section{Arguments}\label{sec:arguments}
 If arguments remain after option processing, and neither the -c nor the -s option has been supplied, the first argument is assumed to be the name of a file containing shell commands. If bash is invoked in this fashion, \$0 is set to the name of the file, and the positional parameters are set to the remaining arguments. Bash reads and executes commands from this file, then exits. Bash's exit status is the exit status of the last command executed in the script. If no commands are executed, the exit status is 0. An attempt is first made to open the file in the current directory, and, if no file is found, then the shell searches the directories in PATH for the script.
 
-\section{Invocation}
-\label{sec:invocation}
+\section{Invocation}\label{sec:invocation}
 A login shell is one whose first character of argument zero is a -, or one started with the --login option.
 
 An interactive shell is one started without non-option arguments and without the -c option whose standard input and error are both connected to terminals (as determined by isatty(3)), or one started with the -i option. PS1 is set and \$- includes i if bash is interactive, allowing a shell script or a startup file to test this state.
@@ -111,19 +132,20 @@ When bash is invoked as an interactive login shell, or as a non-interactive shel
 
 When a login shell exits, bash reads and executes commands from the files \url{~/.bash_logout} and \url{/etc/bash.bash_logout}, if the files exists.
 
-When an interactive shell that is not a login shell is started, bash reads and executes commands from \url{~/.bashrc}, if that file exists. This may be inhibited by using the --norc option. The --rcfile file option will force bash to read and execute commands from file instead of \url{~/.bashrc}.
+When an interactive shell that is not a login shell is started, bash reads and executes commands from \url{~/.bashrc}, if that file exists. This may be inhibited by using the --norc option. The \url{--rcfile} file option will force bash to read and execute commands from file instead of \url{~/.bashrc}.
 
-When bash is started non-interactively, to run a shell script, for example, it looks for the variable BASH\_ENV in the environment, expands its value if it appears there, and uses the expanded value as the name of a file to read and execute. Bash behaves as if the following command were executed:
+When bash is started non-interactively, to run a shell script, for example, it looks for the variable \url{BASH_ENV} in the environment, expands its value if it appears there, and uses the expanded value as the name of a file to read and execute. Bash behaves as if the following command were executed:
+
 \begin{lstlisting}[language=bash]
     if [ -n "\$bash\_ENV" ]; then . "\$bash\_ENV"; fi
 \end{lstlisting}
 but the value of the PATH variable is not used to search for the file name.
 
-If bash is invoked with the name sh, it tries to mimic the startup behavior of historical versions of sh as closely as possible, while conforming to the POSIX standard as well. When invoked as an interactive login shell, or a non-interactive shell with the --login option, it first attempts to read and execute commands from /etc/profile and ~/.profile, in that order. The --noprofile option may be used to inhibit this behavior. When invoked as an interactive shell with the name sh, bash looks for the variable ENV, expands its value if it is defined, and uses the expanded value as the name of a file to read and execute. Since a shell invoked as sh does not attempt to read and execute commands from any other startup files, the --rcfile option has no effect. A non-interactive shell invoked with the name sh does not attempt to read any other startup files. When invoked as sh, bash enters posix mode after the startup files are read.
+If bash is invoked with the name sh, it tries to mimic the startup behavior of historical versions of sh as closely as possible, while conforming to the POSIX standard as well. When invoked as an interactive login shell, or a non-interactive shell with the \url{--login} option, it first attempts to read and execute commands from /etc/profile and \url{~/.profile}, in that order. The \url{--noprofile} option may be used to inhibit this behavior. When invoked as an interactive shell with the name sh, bash looks for the variable ENV, expands its value if it is defined, and uses the expanded value as the name of a file to read and execute. Since a shell invoked as sh does not attempt to read and execute commands from any other startup files, the \url{--rcfile} option has no effect. A non-interactive shell invoked with the name sh does not attempt to read any other startup files. When invoked as sh, bash enters posix mode after the startup files are read.
 
 When bash is started in posix mode, as with the --posix command line option, it follows the POSIX standard for startup files. In this mode, interactive shells expand the ENV variable and commands are read and executed from the file whose name is the expanded value. No other startup files are read.
 
-Bash attempts to determine when it is being run with its standard input connected to a a network connection, as if by the remote shell daemon, usually rshd, or the secure shell daemon sshd. If bash determines it is being run in this fashion, it reads and executes commands from ~/.bashrc, if that file exists and is readable. It will not do this if invoked as sh. The --norc option may be used to inhibit this behavior, and the --rcfile option may be used to force another file to be read, but rshd does not generally invoke the shell with those options or allow them to be specified.
+Bash attempts to determine when it is being run with its standard input connected to a a network connection, as if by the remote shell daemon, usually rshd, or the secure shell daemon sshd. If bash determines it is being run in this fashion, it reads and executes commands from \url{~/.bashrc}, if that file exists and is readable. It will not do this if invoked as sh. The --norc option may be used to inhibit this behavior, and the \url{--rcfile} option may be used to force another file to be read, but rshd does not generally invoke the shell with those options or allow them to be specified.
 
 If the shell is started with the effective user (group) id not equal to the real user (group) id, and the -p option is not supplied, no startup files are read, shell functions are not inherited from the environment, the SHELLOPTS, BASHOPTS, CDPATH, and GLOBIGNORE variables, if they appear in the environment, are ignored, and the effective user id is set to the real user id. If the -p option is supplied at invocation, the startup behavior is the same, but the effective user id is not reset.
 
@@ -131,16 +153,14 @@ If the shell is started with the effective user (group) id not equal to the real
 \label{sec:definitions}
 The following definitions are used throughout the rest of this document.
 
-\begin{longtable}{p{0.2\textwidth}p{0.7\textwidth}}
+\begin{longtable}{p{0.3\textwidth}p{0.65\textwidth}}
 blank &
 A space or tab. \\
 
 word &
-
 A sequence of characters considered as a single unit by the shell. Also known as a token. \\
 
 name &
-
 A word consisting only of alphanumeric characters and underscores, and beginning with an alphabetic character or an underscore. Also referred to as an identifier. \\
 
 metacharacter &
@@ -148,11 +168,12 @@ A character that, when unquoted, separates words. One of the following:
 \begin{lstlisting}[language=bash]
   |& ; ( ) < > space tab
 \end{lstlisting} \\
+
 control operator &
 A token that performs a control function. It is one of the following symbols:
 \begin{lstlisting}[language=bash]
   || & && ; ;; ( ) | & <newline>
-\end{lstlisting} \\
+\end{lstlisting} 
 \end{longtable}
 
 \section{Reserved Words}
@@ -176,7 +197,7 @@ A pipeline is a sequence of one or more commands separated by one of the control
 \begin{lstlisting}
   [time [-p]] [ ! ] command [ [|\&] command2 ... ]
 \end{lstlisting}
-The standard output of command is connected via a pipe to the standard input of command2. This connection is performed before any redirections specified by the command (see REDIRECTION below). If \& is used, the standard error of command is connected to command2's standard input through the pipe; it is shorthand for 2>\&1 |. This implicit redirection of the standard error is performed after any redirections specified by the command.
+The standard output of command is connected via a pipe to the standard input of command2. This connection is performed before any redirections specified by the command \hyperref[sec:redirection]{(see REDIRECTION below)}. If \& is used, the standard error of command is connected to command2's standard input through the pipe; it is shorthand for 2>\&1 |. This implicit redirection of the standard error is performed after any redirections specified by the command.
 The return status of a pipeline is the exit status of the last command, unless the pipefail option is enabled. If pipefail is enabled, the pipeline's return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. If the reserved word ! precedes a pipeline, the exit status of that pipeline is the logical negation of the exit status as described above. The shell waits for all commands in the pipeline to terminate before returning a value.
 
 If the time reserved word precedes a pipeline, the elapsed as well as user and system time consumed by its execution are reported when the pipeline terminates. The -p option changes the output format to that specified by POSIX. The TIMEFORMAT variable may be set to a format string that specifies how the timing information should be displayed; see the description of TIMEFORMAT under Shell Variables below.
@@ -208,7 +229,7 @@ Compound Commands
 
 A compound command is one of the following:
 \subsubsection*{(list)}
-list is executed in a subshell environment (see COMMAND EXECUTION ENVIRONMENT below). Variable assignments and builtin commands that affect the shell's environment do not remain in effect after the command completes. The return status is the exit status of list.
+list is executed in a subshell environment \hyperref[sec:commandexecutionenvironment]{(see COMMAND EXECUTION ENVIRONMENT below)}. Variable assignments and builtin commands that affect the shell's environment do not remain in effect after the command completes. The return status is the exit status of list.
 
 \subsubsection*{\{ list; \}}
 list is simply executed in the current shell environment. list must be terminated with a newline or semicolon. This is known as a group command. The return status is the exit status of list. Note that unlike the metacharacters ( and ), { and } are reserved words and must occur where a reserved word is permitted to be recognized. Since they do not cause a word break, they must be separated from list by whitespace or another shell metacharacter.
@@ -224,7 +245,7 @@ An additional binary operator, =~, is available, with the same precedence as == 
 
 Expressions may be combined using the following operators, listed in decreasing order of precedence:
 
-\begin{longtable}{p{0.3\textwidth}p{0.7\textwidth}}
+\begin{longtable}{p{0.3\textwidth}p{0.65\textwidth}}
 ( expression ) &
 Returns the value of expression. This may be used to override the normal precedence of operators. \\
 
@@ -242,448 +263,508 @@ The \&\& and || operators do not evaluate expression2 if the value of expression
 \begin{lstlisting}[language=bash]
 for name [ [ in [ word ... ] ] ; ] do list ; done
 \end{lstlisting}
-The list of words following in is expanded, generating a list of items. The variable name is set to each element of this list in turn, and list is executed each time. If the in word is omitted, the for command executes list once for each positional parameter that is set (see PARAMETERS below). The return status is the exit status of the last command that executes. If the expansion of the items following in results in an empty list, no commands are executed, and the return status is 0.
+The list of words following in is expanded, generating a list of items. The variable name is set to each element of this list in turn, and list is executed each time. If the in word is omitted, the for command executes list once for each positional parameter that is set \hyperref[sec:parameters]{(see PARAMETERS below)}. The return status is the exit status of the last command that executes. If the expansion of the items following in results in an empty list, no commands are executed, and the return status is 0.
+\begin{lstlisting}
 for (( expr1 ; expr2 ; expr3 )) ; do list ; done
-First, the arithmetic expression expr1 is evaluated according to the rules described below under ARITHMETIC EVALUATION. The arithmetic expression expr2 is then evaluated repeatedly until it evaluates to zero. Each time expr2 evaluates to a non-zero value, list is executed and the arithmetic expression expr3 is evaluated. If any expression is omitted, it behaves as if it evaluates to 1. The return value is the exit status of the last command in list that is executed, or false if any of the expressions is invalid.
+\end{lstlisting}
+First, the arithmetic expression expr1 is evaluated according to the rules described below under \hyperref[sec:arithmeticevaluation]{ARITHMETIC EVALUATION}. The arithmetic expression expr2 is then evaluated repeatedly until it evaluates to zero. Each time expr2 evaluates to a non-zero value, list is executed and the arithmetic expression expr3 is evaluated. If any expression is omitted, it behaves as if it evaluates to 1. The return value is the exit status of the last command in list that is executed, or false if any of the expressions is invalid.
+\begin{lstlisting}
 select name [ in word ] ; do list ; done
-The list of words following in is expanded, generating a list of items. The set of expanded words is printed on the standard error, each preceded by a number. If the in word is omitted, the positional parameters are printed (see PARAMETERS below). The PS3 prompt is then displayed and a line read from the standard input. If the line consists of a number corresponding to one of the displayed words, then the value of name is set to that word. If the line is empty, the words and prompt are displayed again. If EOF is read, the command completes. Any other value read causes name to be set to null. The line read is saved in the variable REPLY. The list is executed after each selection until a break command is executed. The exit status of select is the exit status of the last command executed in list, or zero if no commands were executed.
+\end{lstlisting}
+The list of words following in is expanded, generating a list of items. The set of expanded words is printed on the standard error, each preceded by a number. If the in word is omitted, the positional parameters are printed \hyperref[sec:parameters]{(see PARAMETERS below)}. The PS3 prompt is then displayed and a line read from the standard input. If the line consists of a number corresponding to one of the displayed words, then the value of name is set to that word. If the line is empty, the words and prompt are displayed again. If EOF is read, the command completes. Any other value read causes name to be set to null. The line read is saved in the variable REPLY. The list is executed after each selection until a break command is executed. The exit status of select is the exit status of the last command executed in list, or zero if no commands were executed.
+\begin{lstlisting}
 case word in [ [(] pattern [ | pattern ] ... ) list ;; ] ... esac
-A case command first expands word, and tries to match it against each pattern in turn, using the same matching rules as for pathname expansion (see Pathname Expansion below). The word is expanded using tilde expansion, parameter and variable expansion, arithmetic substitution, command substitution, process substitution and quote removal. Each pattern examined is expanded using tilde expansion, parameter and variable expansion, arithmetic substitution, command substitution, and process substitution. If the shell option nocasematch is enabled, the match is performed without regard to the case of alphabetic characters. When a match is found, the corresponding list is executed. If the ;; operator is used, no subsequent matches are attempted after the first pattern match. Using \& in place of ;; causes execution to continue with the list associated with the next set of patterns. Using ;\& in place of ;; causes the shell to test the next pattern list in the statement, if any, and execute any associated list on a successful match. The exit status is zero if no pattern matches. Otherwise, it is the exit status of the last command executed in list.
+\end{lstlisting}
+
+A case command first expands word, and tries to match it against each pattern in turn, using the same matching rules as for pathname expansion \hyperref[sec:pathnameexpansion]{(see Pathname Expansion below)}. The word is expanded using tilde expansion, parameter and variable expansion, arithmetic substitution, command substitution, process substitution and quote removal. Each pattern examined is expanded using tilde expansion, parameter and variable expansion, arithmetic substitution, command substitution, and process substitution. If the shell option nocasematch is enabled, the match is performed without regard to the case of alphabetic characters. When a match is found, the corresponding list is executed. If the ;; operator is used, no subsequent matches are attempted after the first pattern match. Using \& in place of ;; causes execution to continue with the list associated with the next set of patterns. Using ;\& in place of ;; causes the shell to test the next pattern list in the statement, if any, and execute any associated list on a successful match. The exit status is zero if no pattern matches. Otherwise, it is the exit status of the last command executed in list.
+\begin{lstlisting}
 if list; then list; [ elif list; then list; ] ... [ else list; ] fi
+\end{lstlisting}\label{lst:if}
+
 The if list is executed. If its exit status is zero, the then list is executed. Otherwise, each elif list is executed in turn, and if its exit status is zero, the corresponding then list is executed and the command completes. Otherwise, the else list is executed, if present. The exit status is the exit status of the last command executed, or zero if no condition tested true.
+\begin{lstlisting}
 while list; do list; done
 until list; do list; done
+\end{lstlisting}
 The while command continuously executes the do list as long as the last command in list returns an exit status of zero. The until command is identical to the while command, except that the test is negated; the do list is executed as long as the last command in list returns a non-zero exit status. The exit status of the while and until commands is the exit status of the last do list command executed, or zero if none was executed.
 Coprocesses
 
 A coprocess is a shell command preceded by the coproc reserved word. A coprocess is executed asynchronously in a subshell, as if the command had been terminated with the\& control operator, with a two-way pipe established between the executing shell and the coprocess.
 The format for a coprocess is:
-
+\begin{lstlisting}
 coproc [NAME] command [redirections]
-This creates a coprocess named NAME. If NAME is not supplied, the default name is COPROC. NAME must not be supplied if command is a simple command (see above); otherwise, it is interpreted as the first word of the simple command. When the coproc is executed, the shell creates an array variable (see Arrays below) named NAME in the context of the executing shell. The standard output of command is connected via a pipe to a file descriptor in the executing shell, and that file descriptor is assigned to NAME[0]. The standard input of command is connected via a pipe to a file descriptor in the executing shell, and that file descriptor is assigned to NAME[1]. This pipe is established before any redirections specified by the command (see REDIRECTION below). The file descriptors can be utilized as arguments to shell commands and redirections using standard word expansions. The process id of the shell spawned to execute the coprocess is available as the value of the variable NAME_PID. The wait builtin command may be used to wait for the coprocess to terminate.
+\end{lstlisting}
+
+This creates a coprocess named NAME. If NAME is not supplied, the default name is COPROC. NAME must not be supplied if command is a simple command \hyperref[lst:if]{(see above)}; otherwise, it is interpreted as the first word of the simple command. When the coproc is executed, the shell creates an array variable \hyperref[sec:arrays]{(see Arrays below)} named NAME in the context of the executing shell. The standard output of command is connected via a pipe to a file descriptor in the executing shell, and that file descriptor is assigned to NAME[0]. The standard input of command is connected via a pipe to a file descriptor in the executing shell, and that file descriptor is assigned to NAME[1]. This pipe is established before any redirections specified by the command \hyperref[sec:redirection]{(see REDIRECTION below)}. The file descriptors can be utilized as arguments to shell commands and redirections using standard word expansions. The process id of the shell spawned to execute the coprocess is available as the value of the variable \url{NAME\_PID}. The wait builtin command may be used to wait for the coprocess to terminate.
 The return status of a coprocess is the exit status of command.
 
 \subsection{Shell Function Definitions}
 
 A shell function is an object that is called like a simple command and executes a compound command with a new set of positional parameters. Shell functions are declared as follows:
+\begin{lstlisting}
 [ function ] name () compound-command [redirection]
-This defines a function named name. The reserved word function is optional. If the function reserved word is supplied, the parentheses are optional. The body of the function is the compound command compound-command (see Compound Commands above). That command is usually a list of commands between { and }, but may be any command listed under Compound Commands above. compound-command is executed whenever name is specified as the name of a simple command. Any redirections (see REDIRECTION below) specified when a function is defined are performed when the function is executed. The exit status of a function definition is zero unless a syntax error occurs or a readonly function with the same name already exists. When executed, the exit status of a function is the exit status of the last command executed in the body. (See FUNCTIONS below.)
+\end{lstlisting}
 
-\section{Comments}
-In a non-interactive shell, or an interactive shell in which the interactive_comments option to the shopt builtin is enabled (see SHELL BUILTIN COMMANDS below), a word beginning with # causes that word and all remaining characters on that line to be ignored. An interactive shell without the interactive_comments option enabled does not allow comments. The interactive_comments option is on by default in interactive shells.
+This defines a function named name. The reserved word function is optional. If the function reserved word is supplied, the parentheses are optional. The body of the function is the compound command compound-command (see Compound Commands above). That command is usually a list of commands between { and }, but may be any command listed under Compound Commands above. compound-command is executed whenever name is specified as the name of a simple command. Any redirections \hyperref[sec:redirection]{(see REDIRECTION below)} specified when a function is defined are performed when the function is executed. The exit status of a function definition is zero unless a syntax error occurs or a readonly function with the same name already exists. When executed, the exit status of a function is the exit status of the last command executed in the body. \hyperref[sec:functions]{(See FUNCTIONS below.)}
+
+\section{Comments}\label{sec:comments}
+In a non-interactive shell, or an interactive shell in which the \url{interactive_comments} option to the shopt builtin is enabled \hyperref[sec:shellbuiltincommands]{(see SHELL BUILTIN COMMANDS below)}, a word beginning with \# causes that word and all remaining characters on that line to be ignored. An interactive shell without the \url{interactive_comments} option enabled does not allow comments. The \url{interactive_comments} option is on by default in interactive shells.
 
 \section{Quoting}
+\label{quoting}
 Quoting is used to remove the special meaning of certain characters or words to the shell. Quoting can be used to disable special treatment for special characters, to prevent reserved words from being recognized as such, and to prevent parameter expansion.
 
 Each of the metacharacters listed above under DEFINITIONS has special meaning to the shell and must be quoted if it is to represent itself.
 
-When the command history expansion facilities are being used (see HISTORY EXPANSION below), the history expansion character, usually !, must be quoted to prevent history expansion.
+When the command history expansion facilities are being used \hyperref[sec:historyexpansion]{(see HISTORY EXPANSION)}, the history expansion character, usually !, must be quoted to prevent history expansion.
 
 There are three quoting mechanisms: the escape character, single quotes, and double quotes.
 
-A non-quoted backslash (\) is the escape character. It preserves the literal value of the next character that follows, with the exception of <newline>. If a \<newline> pair appears, and the backslash is not itself quoted, the \<newline> is treated as a line continuation (that is, it is removed from the input stream and effectively ignored).
+A non-quoted backslash (\textbackslash) is the escape character. It preserves the literal value of the next character that follows, with the exception of <newline>. If a \textbackslash<newline> pair appears, and the backslash is not itself quoted, the \textbackslash<newline> is treated as a line continuation (that is, it is removed from the input stream and effectively ignored).
 
 Enclosing characters in single quotes preserves the literal value of each character within the quotes. A single quote may not occur between single quotes, even when preceded by a backslash.
 
-Enclosing characters in double quotes preserves the literal value of all characters within the quotes, with the exception of $, `, \, and, when history expansion is enabled, !. The characters $ and ` retain their special meaning within double quotes. The backslash retains its special meaning only when followed by one of the following characters: $, `, ", \, or <newline>. A double quote may be quoted within double quotes by preceding it with a backslash. If enabled, history expansion will be performed unless an ! appearing in double quotes is escaped using a backslash. The backslash preceding the ! is not removed.
+Enclosing characters in double quotes preserves the literal value of all characters within the quotes, with the exception of \$, `, \textbackslash, and, when history expansion is enabled, !. The characters \$ and ` retain their special meaning within double quotes. The backslash retains its special meaning only when followed by one of the following characters: \$, `, ", \textbackslash, or <newline>. A double quote may be quoted within double quotes by preceding it with a backslash. If enabled, history expansion will be performed unless an ! appearing in double quotes is escaped using a backslash. The backslash preceding the ! is not removed.
 
-The special parameters * and @ have special meaning when in double quotes (see PARAMETERS below).
+The special parameters * and @ have special meaning when in double quotes \hyperref[sec:parameters]{(see PARAMETERS below)}.
 
-Words of the form $'string' are treated specially. The word expands to string, with backslash-escaped characters replaced as specified by the ANSI C standard. Backslash escape sequences, if present, are decoded as follows:
+Words of the form \$'string' are treated specially. The word expands to string, with backslash-escaped characters replaced as specified by the ANSI C standard. Backslash escape sequences, if present, are decoded as follows:
 
-\a
-alert (bell)
-
-\b
-
-backspace
-
-\e
-
-\E
-
-an escape character
-
-\f
-
-form feed
-
-\n
-
-new line
-
-\r
-
-carriage return
-
-\t
-
-horizontal tab
-
-\v
-
-vertical tab
-
-\\
-
-backslash
-
-\'
-
-single quote
-
-\"
-
-double quote
-
-\nnn
-
-the eight-bit character whose value is the octal value nnn (one to three digits)
-
-\xHH
-
-the eight-bit character whose value is the hexadecimal value HH (one or two hex digits)
-
-\cx
-
+\begin{longtable}{p{0.3\textwidth}p{0.65\textwidth}}
+\textbackslash a &
+alert (bell) \\
+\textbackslash b &
+backspace \\
+\textbackslash e \newline
+\textbackslash E &
+an escape character \\
+\textbackslash f &
+form feed \\
+\textbackslash n &
+new line \\
+\textbackslash r &
+carriage return \\
+\textbackslash t &
+horizontal tab \\
+\textbackslash v &
+vertical tab \\
+\textbackslash\textbackslash &
+backslash \\
+\textbackslash ' &
+single quote \\
+\textbackslash " &
+double quote \\
+\textbackslash nnn &
+the eight-bit character whose value is the octal value nnn (one to three digits) \\
+\textbackslash xHH &
+the eight-bit character whose value is the hexadecimal value HH (one or two hex digits) \\
+\textbackslash cx &
 a control-x character
+\end{longtable}
 
 The expanded result is single-quoted, as if the dollar sign had not been present.
-A double-quoted string preceded by a dollar sign ($"string") will cause the string to be translated according to the current locale. If the current locale is C or POSIX, the dollar sign is ignored. If the string is translated and replaced, the replacement is double-quoted.
+A double-quoted string preceded by a dollar sign (\$"string") will cause the string to be translated according to the current locale. If the current locale is C or POSIX, the dollar sign is ignored. If the string is translated and replaced, the replacement is double-quoted.
 
-Parameters
+\section{Parameters}\label{sec:parameters}
 A parameter is an entity that stores values. It can be a name, a number, or one of the special characters listed below under Special Parameters. A variable is a parameter denoted by a name. A variable has a value and zero or more attributes. Attributes are assigned using the declare builtin command (see declare below in SHELL BUILTIN COMMANDS).
 
 A parameter is set if it has been assigned a value. The null string is a valid value. Once a variable is set, it may be unset only by using the unset builtin command (see SHELL BUILTIN COMMANDS below).
 
 A variable may be assigned to by a statement of the form
 
+\begin{lstlisting}
 name=[value]
-If value is not given, the variable is assigned the null string. All values undergo tilde expansion, parameter and variable expansion, command substitution, arithmetic expansion, and quote removal (see EXPANSION below). If the variable has its integer attribute set, then value is evaluated as an arithmetic expression even if the $((...)) expansion is not used (see Arithmetic Expansion below). Word splitting is not performed, with the exception of "$@" as explained below under Special Parameters. Pathname expansion is not performed. Assignment statements may also appear as arguments to the alias, declare, typeset, export, readonly, and local builtin commands.
+\end{lstlisting}
+
+If value is not given, the variable is assigned the null string. All values undergo tilde expansion, parameter and variable expansion, command substitution, arithmetic expansion, and quote removal \hyperref[sec:expansion]{(see EXPANSION below)}. If the variable has its integer attribute set, then value is evaluated as an arithmetic expression even if the \$\url{((...))} %bad syntax highlighting workaround.
+expansion is not used \hyperref[sec:arithmeticexpansion]{(see Arithmetic Expansion below)}. Word splitting is not performed, with the exception of "\$@" as explained below under Special Parameters. Pathname expansion is not performed. Assignment statements may also appear as arguments to the alias, declare, typeset, export, readonly, and local builtin commands.
 In the context where an assignment statement is assigning a value to a shell variable or array index, the += operator can be used to append to or add to the variable's previous value. When += is applied to a variable for which the integer attribute has been set, value is evaluated as an arithmetic expression and added to the variable's current value, which is also evaluated. When += is applied to an array variable using compound assignment (see Arrays below), the variable's value is not unset (as it is when using =), and new values are appended to the array beginning at one greater than the array's maximum index (for indexed arrays) or added as additional key-value pairs in an associative array. When applied to a string-valued variable, value is expanded and appended to the variable's value.
 
-Positional Parameters
+\subsection{Positional Parameters}\label{sec:positionalparameters}
 
 A positional parameter is a parameter denoted by one or more digits, other than the single digit 0. Positional parameters are assigned from the shell's arguments when it is invoked, and may be reassigned using the set builtin command. Positional parameters may not be assigned to with assignment statements. The positional parameters are temporarily replaced when a shell function is executed (see FUNCTIONS below).
 When a positional parameter consisting of more than a single digit is expanded, it must be enclosed in braces (see EXPANSION below).
 
-Special Parameters
+\subsection{Special Parameters}\label{sec:specialparameters}
 
 The shell treats several parameters specially. These parameters may only be referenced; assignment to them is not allowed.
-*
-Expands to the positional parameters, starting from one. When the expansion occurs within double quotes, it expands to a single word with the value of each parameter separated by the first character of the IFS special variable. That is, "$*" is equivalent to "$1c$2c...", where c is the first character of the value of the IFS variable. If IFS is unset, the parameters are separated by spaces. If IFS is null, the parameters are joined without intervening separators.
 
-@
+\begin{longtable}{p{0.1\textwidth}p{0.85\textwidth}}
 
-Expands to the positional parameters, starting from one. When the expansion occurs within double quotes, each parameter expands to a separate word. That is, "$@" is equivalent to "$1" "$2" ... If the double-quoted expansion occurs within a word, the expansion of the first parameter is joined with the beginning part of the original word, and the expansion of the last parameter is joined with the last part of the original word. When there are no positional parameters, "$@" and $@ expand to nothing (i.e., they are removed).
+* &
+Expands to the positional parameters, starting from one. When the expansion occurs within double quotes, it expands to a single word with the value of each parameter separated by the first character of the IFS special variable. That is, "\$*" is equivalent to "\$1c\$2c...", where c is the first character of the value of the IFS variable. If IFS is unset, the parameters are separated by spaces. If IFS is null, the parameters are joined without intervening separators. \\
 
-#
+@ &
 
-Expands to the number of positional parameters in decimal.
+Expands to the positional parameters, starting from one. When the expansion occurs within double quotes, each parameter expands to a separate word. That is, "\$@" is equivalent to "\$1" "\$2" ... If the double-quoted expansion occurs within a word, the expansion of the first parameter is joined with the beginning part of the original word, and the expansion of the last parameter is joined with the last part of the original word. When there are no positional parameters, "\$@" and \$@ expand to nothing (i.e., they are removed). \\
 
-?
+\# &
 
-Expands to the exit status of the most recently executed foreground pipeline.
+Expands to the number of positional parameters in decimal. \\
 
--
+? &
 
-Expands to the current option flags as specified upon invocation, by the set builtin command, or those set by the shell itself (such as the -i option).
+Expands to the exit status of the most recently executed foreground pipeline. \\
 
-$
+- &
 
-Expands to the process ID of the shell. In a () subshell, it expands to the process ID of the current shell, not the subshell.
+Expands to the current option flags as specified upon invocation, by the set builtin command, or those set by the shell itself (such as the -i option). \\
 
-!
+\$ &
 
-Expands to the process ID of the most recently executed background (asynchronous) command.
+Expands to the process ID of the shell. In a () subshell, it expands to the process ID of the current shell, not the subshell. \\
 
-0
+! &
 
-Expands to the name of the shell or shell script. This is set at shell initialization. If bash is invoked with a file of commands, $0 is set to the name of that file. If bash is started with the -c option, then $0 is set to the first argument after the string to be executed, if one is present. Otherwise, it is set to the file name used to invoke bash, as given by argument zero.
+Expands to the process ID of the most recently executed background (asynchronous) command. \\
 
-_
+0 &
 
-At shell startup, set to the absolute pathname used to invoke the shell or shell script being executed as passed in the environment or argument list. Subsequently, expands to the last argument to the previous command, after expansion. Also set to the full pathname used to invoke each command executed and placed in the environment exported to that command. When checking mail, this parameter holds the name of the mail file currently being checked.
+Expands to the name of the shell or shell script. This is set at shell initialization. If bash is invoked with a file of commands, \$0 is set to the name of that file. If bash is started with the -c option, then \$0 is set to the first argument after the string to be executed, if one is present. Otherwise, it is set to the file name used to invoke bash, as given by argument zero. \\
 
-Shell Variables
+\_ &
+
+At shell startup, set to the absolute pathname used to invoke the shell or shell script being executed as passed in the environment or argument list. Subsequently, expands to the last argument to the previous command, after expansion. Also set to the full pathname used to invoke each command executed and placed in the environment exported to that command. When checking mail, this parameter holds the name of the mail file currently being checked. \\
+
+\end{longtable}
+
+\section{Shell Variables}\label{sec:shellvariables}
 
 The following variables are set by the shell:
-BASH
-Expands to the full file name used to invoke this instance of bash.
+\begin{longtable}{p{0.3\textwidth}p{0.65\textwidth}}
+BASH &
+Expands to the full file name used to invoke this instance of bash. \\
 
-BASHOPTS
-A colon-separated list of enabled shell options. Each word in the list is a valid argument for the -s option to the shopt builtin command (see SHELL BUILTIN COMMANDS below). The options appearing in BASHOPTS are those reported as on by shopt. If this variable is in the environment when bash starts up, each shell option in the list will be enabled before reading any startup files. This variable is read-only.
-BASHPID
-Expands to the process id of the current bash process. This differs from $$ under certain circumstances, such as subshells that do not require bash to be re-initialized.
-bash\_ALIASES
-An associative array variable whose members correspond to the internal list of aliases as maintained by the alias builtin Elements added to this array appear in the alias list; unsetting array elements cause aliases to be removed from the alias list.
-bash\_ARGC
-An array variable whose values are the number of parameters in each frame of the current bash execution call stack. The number of parameters to the current subroutine (shell function or script executed with . or source) is at the top of the stack. When a subroutine is executed, the number of parameters passed is pushed onto bash\_ARGC. The shell sets bash\_ARGC only when in extended debugging mode (see the description of the extdebug option to the shopt builtin below)
-bash\_ARGV
-An array variable containing all of the parameters in the current bash execution call stack. The final parameter of the last subroutine call is at the top of the stack; the first parameter of the initial call is at the bottom. When a subroutine is executed, the parameters supplied are pushed onto bash\_ARGV. The shell sets bash\_ARGV only when in extended debugging mode (see the description of the extdebug option to the shopt builtin below)
-bash\_CMDS
-An associative array variable whose members correspond to the internal hash table of commands as maintained by the hash builtin. Elements added to this array appear in the hash table; unsetting array elements cause commands to be removed from the hash table.
-bash\_COMMAND
-The command currently being executed or about to be executed, unless the shell is executing a command as the result of a trap, in which case it is the command executing at the time of the trap.
-bash\_EXECUTION_STRING
-The command argument to the -c invocation option.
-bash\_LINENO
-An array variable whose members are the line numbers in source files corresponding to each member of FUNCNAME. ${bash\_LINENO[$i]} is the line number in the source file where ${FUNCNAME[$i]} was called (or ${bash\_LINENO[$i-1]} if referenced within another shell function). The corresponding source file name is ${bash\_SOURCE[$i]}. Use LINENO to obtain the current line number.
-bash\_REMATCH
-An array variable whose members are assigned by the =~ binary operator to the [[ conditional command. The element with index 0 is the portion of the string matching the entire regular expression. The element with index n is the portion of the string matching the nth parenthesized subexpression. This variable is read-only.
-bash\_SOURCE
-An array variable whose members are the source filenames corresponding to the elements in the FUNCNAME array variable.
-bash\_SUBSHELL
-Incremented by one each time a subshell or subshell environment is spawned. The initial value is 0.
-bash\_VERSINFO
+BASHOPTS &
+A colon-separated list of enabled shell options. Each word in the list is a valid argument for the -s option to the shopt builtin command (see SHELL BUILTIN COMMANDS below). The options appearing in BASHOPTS are those reported as on by shopt. If this variable is in the environment when bash starts up, each shell option in the list will be enabled before reading any startup files. This variable is read-only. \\
+
+BASHPID &
+Expands to the process id of the current bash process. This differs from \$\$ under certain circumstances, such as subshells that do not require bash to be re-initialized. \\
+
+bash\_ALIASES &
+An associative array variable whose members correspond to the internal list of aliases as maintained by the alias builtin Elements added to this array appear in the alias list; unsetting array elements cause aliases to be removed from the alias list. \\
+
+bash\_ARGC &
+An array variable whose values are the number of parameters in each frame of the current bash execution call stack. The number of parameters to the current subroutine (shell function or script executed with . or source) is at the top of the stack. When a subroutine is executed, the number of parameters passed is pushed onto bash\_ARGC. The shell sets bash\_ARGC only when in extended debugging mode (see the description of the extdebug option to the shopt builtin below) \\
+
+bash\_ARGV &
+An array variable containing all of the parameters in the current bash execution call stack. The final parameter of the last subroutine call is at the top of the stack; the first parameter of the initial call is at the bottom. When a subroutine is executed, the parameters supplied are pushed onto bash\_ARGV. The shell sets bash\_ARGV only when in extended debugging mode (see the description of the extdebug option to the shopt builtin below) \\
+
+bash\_CMDS &
+An associative array variable whose members correspond to the internal hash table of commands as maintained by the hash builtin. Elements added to this array appear in the hash table; unsetting array elements cause commands to be removed from the hash table. \\
+
+bash\_COMMAND &
+The command currently being executed or about to be executed, unless the shell is executing a command as the result of a trap, in which case it is the command executing at the time of the trap. \\
+
+bash\_EXECUTION\_STRING &
+The command argument to the -c invocation option. \\
+
+bash\_LINENO &
+An array variable whose members are the line numbers in source files corresponding to each member of FUNCNAME. \${bash\_LINENO[\$i]} is the line number in the source file where \${FUNCNAME[\$i]} was called (or \${bash\_LINENO[\$i-1]} if referenced within another shell function). The corresponding source file name is \${bash\_SOURCE[\$i]}. Use LINENO to obtain the current line number. \\
+
+bash\_REMATCH &
+An array variable whose members are assigned by the =~ binary operator to the [[ conditional command. The element with index 0 is the portion of the string matching the entire regular expression. The element with index n is the portion of the string matching the nth parenthesized subexpression. This variable is read-only. \\
+
+bash\_SOURCE &
+An array variable whose members are the source filenames corresponding to the elements in the FUNCNAME array variable. \\
+
+bash\_SUBSHELL &
+Incremented by one each time a subshell or subshell environment is spawned. The initial value is 0. \\
+
+bash\_VERSINFO &
 A readonly array variable whose members hold version information for this instance of bash. The values assigned to the array members are as follows:
-bash\_VERSINFO[0]
-The major version number (the release).
+\end{longtable}
 
-bash\_VERSINFO[1]
+\begin{longtable}{p{0.3\textwidth}p{0.2\textwidth}p{0.35\textwidth}}
 
-The minor version number (the version).
+ & bash\_VERSINFO[0] &
+The major version number (the release). \\
 
-bash\_VERSINFO[2]
+ & bash\_VERSINFO[1] &
 
-The patch level.
+The minor version number (the version). \\
 
-bash\_VERSINFO[3]
+ & bash\_VERSINFO[2] &
 
-The build version.
+The patch level. \\
 
-bash\_VERSINFO[4]
+ & bash\_VERSINFO[3] &
 
-The release status (e.g., beta1).
+The build version. \\
 
-bash\_VERSINFO[5]
+ & bash\_VERSINFO[4] &
 
-The value of MACHTYPE.
+The release status (e.g., beta1). \\
 
-bash\_VERSION
-Expands to a string describing the version of this instance of bash.
-COMP_CWORD
-An index into ${COMP_WORDS} of the word containing the current cursor position. This variable is available only in shell functions invoked by the programmable completion facilities (see Programmable Completion below).
-COMP_KEY
-The key (or final key of a key sequence) used to invoke the current completion function.
-COMP_LINE
-The current command line. This variable is available only in shell functions and external commands invoked by the programmable completion facilities (see Programmable Completion below).
-COMP_POINT
-The index of the current cursor position relative to the beginning of the current command. If the current cursor position is at the end of the current command, the value of this variable is equal to ${#COMP_LINE}. This variable is available only in shell functions and external commands invoked by the programmable completion facilities (see Programmable Completion below).
-COMP_TYPE
-Set to an integer value corresponding to the type of completion attempted that caused a completion function to be called: TAB, for normal completion, ?, for listing completions after successive tabs, !, for listing alternatives on partial word completion, @, to list completions if the word is not unmodified, or %, for menu completion. This variable is available only in shell functions and external commands invoked by the programmable completion facilities (see Programmable Completion below).
-COMP_WORDBREAKS
-The set of characters that the readline library treats as word separators when performing word completion. If COMP_WORDBREAKS is unset, it loses its special properties, even if it is subsequently reset.
-COMP_WORDS
-An array variable (see Arrays below) consisting of the individual words in the current command line. The line is split into words as readline would split it, using COMP_WORDBREAKS as described above. This variable is available only in shell functions invoked by the programmable completion facilities (see Programmable Completion below).
-DIRSTACK
-An array variable (see Arrays below) containing the current contents of the directory stack. Directories appear in the stack in the order they are displayed by the dirs builtin. Assigning to members of this array variable may be used to modify directories already in the stack, but the pushd and popd builtins must be used to add and remove directories. Assignment to this variable will not change the current directory. If DIRSTACK is unset, it loses its special properties, even if it is subsequently reset.
-EUID
-Expands to the effective user ID of the current user, initialized at shell startup. This variable is readonly.
+ & bash\_VERSINFO[5] &
 
-FUNCNAME
-An array variable containing the names of all shell functions currently in the execution call stack. The element with index 0 is the name of any currently-executing shell function. The bottom-most element is "main". This variable exists only when a shell function is executing. Assignments to FUNCNAME have no effect and return an error status. If FUNCNAME is unset, it loses its special properties, even if it is subsequently reset.
-GROUPS
-An array variable containing the list of groups of which the current user is a member. Assignments to GROUPS have no effect and return an error status. If GROUPS is unset, it loses its special properties, even if it is subsequently reset.
+The value of MACHTYPE. \\
+\end{longtable}
 
-HISTCMD
-The history number, or index in the history list, of the current command. If HISTCMD is unset, it loses its special properties, even if it is subsequently reset.
-HOSTNAME
-Automatically set to the name of the current host.
-HOSTTYPE
-Automatically set to a string that uniquely describes the type of machine on which bash is executing. The default is system-dependent.
-LINENO
-Each time this parameter is referenced, the shell substitutes a decimal number representing the current sequential line number (starting with 1) within a script or function. When not in a script or function, the value substituted is not guaranteed to be meaningful. If LINENO is unset, it loses its special properties, even if it is subsequently reset.
+\begin{longtable}{p{0.3\textwidth}p{0.65\textwidth}}
+bash\_VERSION &
+Expands to a string describing the version of this instance of bash. \\
 
-MACHTYPE
-Automatically set to a string that fully describes the system type on which bash is executing, in the standard GNU cpu-company-system format. The default is system-dependent.
-OLDPWD
-The previous working directory as set by the cd command.
+COMP\_CWORD &
+An index into \${COMP\_WORDS} of the word containing the current cursor position. This variable is available only in shell functions invoked by the programmable completion facilities (see Programmable Completion below). \\
 
-OPTARG
+COMP\_KEY &
+The key (or final key of a key sequence) used to invoke the current completion function. \\
 
-The value of the last option argument processed by the getopts builtin command (see SHELL BUILTIN COMMANDS below).
+COMP\_LINE &
+The current command line. This variable is available only in shell functions and external commands invoked by the programmable completion facilities (see Programmable Completion below). \\
 
-OPTIND
+COMP\_POINT &
+The index of the current cursor position relative to the beginning of the current command. If the current cursor position is at the end of the current command, the value of this variable is equal to \${\#COMP\_LINE}. This variable is available only in shell functions and external commands invoked by the programmable completion facilities (see Programmable Completion below). \\
 
-The index of the next argument to be processed by the getopts builtin command (see SHELL BUILTIN COMMANDS below).
+COMP\_TYPE &
+Set to an integer value corresponding to the type of completion attempted that caused a completion function to be called: TAB, for normal completion, ?, for listing completions after successive tabs, !, for listing alternatives on partial word completion, @, to list completions if the word is not unmodified, or \%, for menu completion. This variable is available only in shell functions and external commands invoked by the programmable completion facilities (see Programmable Completion below). \\
 
-OSTYPE
+COMP\_WORDBREAKS &
+The set of characters that the readline library treats as word separators when performing word completion. If COMP\_WORDBREAKS is unset, it loses its special properties, even if it is subsequently reset. \\
 
-Automatically set to a string that describes the operating system on which bash is executing. The default is system-dependent.
+COMP\_WORDS &
+An array variable (see Arrays below) consisting of the individual words in the current command line. The line is split into words as readline would split it, using COMP\_WORDBREAKS as described above. This variable is available only in shell functions invoked by the programmable completion facilities (see Programmable Completion below). \\
+DIRSTACK &
+An array variable (see Arrays below) containing the current contents of the directory stack. Directories appear in the stack in the order they are displayed by the dirs builtin. Assigning to members of this array variable may be used to modify directories already in the stack, but the pushd and popd builtins must be used to add and remove directories. Assignment to this variable will not change the current directory. If DIRSTACK is unset, it loses its special properties, even if it is subsequently reset. \\
 
-PIPESTATUS
-An array variable (see Arrays below) containing a list of exit status values from the processes in the most-recently-executed foreground pipeline (which may contain only a single command).
-PPID
-The process ID of the shell's parent. This variable is readonly.
+EUID &
+Expands to the effective user ID of the current user, initialized at shell startup. This variable is readonly. \\
 
-PWD
+FUNCNAME &
+An array variable containing the names of all shell functions currently in the execution call stack. The element with index 0 is the name of any currently-executing shell function. The bottom-most element is "main". This variable exists only when a shell function is executing. Assignments to FUNCNAME have no effect and return an error status. If FUNCNAME is unset, it loses its special properties, even if it is subsequently reset. \\
 
-The current working directory as set by the cd command.
+GROUPS &
+An array variable containing the list of groups of which the current user is a member. Assignments to GROUPS have no effect and return an error status. If GROUPS is unset, it loses its special properties, even if it is subsequently reset. \\
 
-RANDOM
+HISTCMD &
+The history number, or index in the history list, of the current command. If HISTCMD is unset, it loses its special properties, even if it is subsequently reset. \\
 
-Each time this parameter is referenced, a random integer between 0 and 32767 is generated. The sequence of random numbers may be initialized by assigning a value to RANDOM. If RANDOM is unset, it loses its special properties, even if it is subsequently reset.
+HOSTNAME &
+Automatically set to the name of the current host. \\
 
-REPLY
+HOSTTYPE &
+Automatically set to a string that uniquely describes the type of machine on which bash is executing. The default is system-dependent.\\
 
-Set to the line of input read by the read builtin command when no arguments are supplied.
+LINENO &
+Each time this parameter is referenced, the shell substitutes a decimal number representing the current sequential line number (starting with 1) within a script or function. When not in a script or function, the value substituted is not guaranteed to be meaningful. If LINENO is unset, it loses its special properties, even if it is subsequently reset.\\
 
-SECONDS
-Each time this parameter is referenced, the number of seconds since shell invocation is returned. If a value is assigned to SECONDS, the value returned upon subsequent references is the number of seconds since the assignment plus the value assigned. If SECONDS is unset, it loses its special properties, even if it is subsequently reset.
-SHELLOPTS
-A colon-separated list of enabled shell options. Each word in the list is a valid argument for the -o option to the set builtin command (see SHELL BUILTIN COMMANDS below). The options appearing in SHELLOPTS are those reported as on by set -o. If this variable is in the environment when bash starts up, each shell option in the list will be enabled before reading any startup files. This variable is read-only.
-SHLVL
-Incremented by one each time an instance of bash is started.
+MACHTYPE &
+Automatically set to a string that fully describes the system type on which bash is executing, in the standard GNU cpu-company-system format. The default is system-dependent. \\
 
-UID
+OLDPWD &
+The previous working directory as set by the cd command. \\
 
-Expands to the user ID of the current user, initialized at shell startup. This variable is readonly.
+OPTARG &
+The value of the last option argument processed by the getopts builtin command (see SHELL BUILTIN COMMANDS below). \\
+
+OPTIND &
+The index of the next argument to be processed by the getopts builtin command (see SHELL BUILTIN COMMANDS below). \\
+
+OSTYPE &
+Automatically set to a string that describes the operating system on which bash is executing. The default is system-dependent. \\
+
+PIPESTATUS &
+An array variable (see Arrays below) containing a list of exit status values from the processes in the most-recently-executed foreground pipeline (which may contain only a single command). \\
+
+PPID &
+The process ID of the shell's parent. This variable is readonly. \\
+
+PWD &
+The current working directory as set by the cd command. \\
+
+RANDOM &
+Each time this parameter is referenced, a random integer between 0 and 32767 is generated. The sequence of random numbers may be initialized by assigning a value to RANDOM. If RANDOM is unset, it loses its special properties, even if it is subsequently reset. \\
+
+REPLY &
+Set to the line of input read by the read builtin command when no arguments are supplied. \\
+
+SECONDS &
+Each time this parameter is referenced, the number of seconds since shell invocation is returned. If a value is assigned to SECONDS, the value returned upon subsequent references is the number of seconds since the assignment plus the value assigned. If SECONDS is unset, it loses its special properties, even if it is subsequently reset. \\
+
+SHELLOPTS &
+A colon-separated list of enabled shell options. Each word in the list is a valid argument for the -o option to the set builtin command (see SHELL BUILTIN COMMANDS below). The options appearing in SHELLOPTS are those reported as on by set -o. If this variable is in the environment when bash starts up, each shell option in the list will be enabled before reading any startup files. This variable is read-only. \\
+
+SHLVL &
+Incremented by one each time an instance of bash is started. \\
+
+UID &
+Expands to the user ID of the current user, initialized at shell startup. This variable is readonly. \\
+
+\end{longtable}
 
 The following variables are used by the shell. In some cases, bash assigns a default value to a variable; these cases are noted below.
-bash\_ENV
-If this parameter is set when bash is executing a shell script, its value is interpreted as a filename containing commands to initialize the shell, as in ~/.bashrc. The value of bash\_ENV is subjected to parameter expansion, command substitution, and arithmetic expansion before being interpreted as a file name. PATH is not used to search for the resultant file name.
-CDPATH
-The search path for the cd command. This is a colon-separated list of directories in which the shell looks for destination directories specified by the cd command. A sample value is ".:~:/usr".
+\begin{longtable}{p{0.3\textwidth}p{0.65\textwidth}}
 
-bash\_XTRACEFD
-If set to an integer corresponding to a valid file descriptor, bash will write the trace output generated when set -x is enabled to that file descriptor. The file descriptor is closed when bash\_XTRACEFD is unset or assigned a new value. Unsetting bash\_XTRACEFD or assigning it the empty string causes the trace output to be sent to the standard error. Note that setting bash\_XTRACEFD to 2 (the standard error file descriptor) and then unsetting it will result in the standard error being closed.
-COLUMNS
-Used by the select builtin command to determine the terminal width when printing selection lists. Automatically set upon receipt of a SIGWINCH.
-COMPREPLY
-An array variable from which bash reads the possible completions generated by a shell function invoked by the programmable completion facility (see Programmable Completion below).
-EMACS
-If bash finds this variable in the environment when the shell starts with value "t", it assumes that the shell is running in an emacs shell buffer and disables line editing.
+bash\_ENV &
+If this parameter is set when bash is executing a shell script, its value is interpreted as a filename containing commands to initialize the shell, as in ~/.bashrc. The value of bash\_ENV is subjected to parameter expansion, command substitution, and arithmetic expansion before being interpreted as a file name. PATH is not used to search for the resultant file name. \\
 
-FCEDIT
+CDPATH &
+The search path for the cd command. This is a colon-separated list of directories in which the shell looks for destination directories specified by the cd command. A sample value is ".:~:/usr". \\
 
-The default editor for the fc builtin command.
+bash\_XTRACEFD &
+If set to an integer corresponding to a valid file descriptor, bash will write the trace output generated when set -x is enabled to that file descriptor. The file descriptor is closed when bash\_XTRACEFD is unset or assigned a new value. Unsetting bash\_XTRACEFD or assigning it the empty string causes the trace output to be sent to the standard error. Note that setting bash\_XTRACEFD to 2 (the standard error file descriptor) and then unsetting it will result in the standard error being closed. \\
 
-FIGNORE
-A colon-separated list of suffixes to ignore when performing filename completion (see READLINE below). A filename whose suffix matches one of the entries in FIGNORE is excluded from the list of matched filenames. A sample value is ".o:~".
-GLOBIGNORE
-A colon-separated list of patterns defining the set of filenames to be ignored by pathname expansion. If a filename matched by a pathname expansion pattern also matches one of the patterns in GLOBIGNORE, it is removed from the list of matches.
-HISTCONTROL
-A colon-separated list of values controlling how commands are saved on the history list. If the list of values includes ignorespace, lines which begin with a space character are not saved in the history list. A value of ignoredups causes lines matching the previous history entry to not be saved. A value of ignoreboth is shorthand for ignorespace and ignoredups. A value of erasedups causes all previous lines matching the current line to be removed from the history list before that line is saved. Any value not in the above list is ignored. If HISTCONTROL is unset, or does not include a valid value, all lines read by the shell parser are saved on the history list, subject to the value of HISTIGNORE. The second and subsequent lines of a multi-line compound command are not tested, and are added to the history regardless of the value of HISTCONTROL.
-HISTFILE
-The name of the file in which command history is saved (see HISTORY below). The default value is ~/.bash\_history. If unset, the command history is not saved when an interactive shell exits.
-HISTFILESIZE
-The maximum number of lines contained in the history file. When this variable is assigned a value, the history file is truncated, if necessary, by removing the oldest entries, to contain no more than that number of lines. The default value is 500. The history file is also truncated to this size after writing it when an interactive shell exits.
-HISTIGNORE
-A colon-separated list of patterns used to decide which command lines should be saved on the history list. Each pattern is anchored at the beginning of the line and must match the complete line (no implicit '*' is appended). Each pattern is tested against the line after the checks specified by HISTCONTROL are applied. In addition to the normal shell pattern matching characters, \&' matches the previous history line. \&' may be escaped using a backslash; the backslash is removed before attempting a match. The second and subsequent lines of a multi-line compound command are not tested, and are added to the history regardless of the value of HISTIGNORE.
-HISTSIZE
-The number of commands to remember in the command history (see HISTORY below). The default value is 500.
-HISTTIMEFORMAT
-If this variable is set and not null, its value is used as a format string for strftime(3) to print the time stamp associated with each history entry displayed by the history builtin. If this variable is set, time stamps are written to the history file so they may be preserved across shell sessions. This uses the history comment character to distinguish timestamps from other history lines.
-HOME
-The home directory of the current user; the default argument for the cd builtin command. The value of this variable is also used when performing tilde expansion.
+COLUMNS &
+Used by the select builtin command to determine the terminal width when printing selection lists. Automatically set upon receipt of a SIGWINCH. \\
 
-HOSTFILE
-Contains the name of a file in the same format as /etc/hosts that should be read when the shell needs to complete a hostname. The list of possible hostname completions may be changed while the shell is running; the next time hostname completion is attempted after the value is changed, bash adds the contents of the new file to the existing list. If HOSTFILE is set, but has no value, or does not name a readable file, bash attempts to read /etc/hosts to obtain the list of possible hostname completions. When HOSTFILE is unset, the hostname list is cleared.
-IFS
-The Internal Field Separator that is used for word splitting after expansion and to split lines into words with the read builtin command. The default value is ''<space><tab><newline>''.
+COMPREPLY &
+An array variable from which bash reads the possible completions generated by a shell function invoked by the programmable completion facility (see Programmable Completion below). \\
 
-IGNOREEOF
-Controls the action of an interactive shell on receipt of an EOF character as the sole input. If set, the value is the number of consecutive EOF characters which must be typed as the first characters on an input line before bash exits. If the variable exists but does not have a numeric value, or has no value, the default value is 10. If it does not exist, EOF signifies the end of input to the shell.
-INPUTRC
-The filename for the readline startup file, overriding the default of ~/.inputrc (see READLINE below).
-LANG
-Used to determine the locale category for any category not specifically selected with a variable starting with LC_.
+EMACS &
+If bash finds this variable in the environment when the shell starts with value "t", it assumes that the shell is running in an emacs shell buffer and disables line editing. \\
 
-LC_ALL
+FCEDIT &
 
-This variable overrides the value of LANG and any other LC_ variable specifying a locale category.
+The default editor for the fc builtin command. \\
 
-LC_COLLATE
-This variable determines the collation order used when sorting the results of pathname expansion, and determines the behavior of range expressions, equivalence classes, and collating sequences within pathname expansion and pattern matching.
-LC_CTYPE
-This variable determines the interpretation of characters and the behavior of character classes within pathname expansion and pattern matching.
-LC_MESSAGES
-This variable determines the locale used to translate double-quoted strings preceded by a $.
-LC_NUMERIC
-This variable determines the locale category used for number formatting.
-LINES
-Used by the select builtin command to determine the column length for printing selection lists. Automatically set upon receipt of a SIGWINCH.
+FIGNORE &
+A colon-separated list of suffixes to ignore when performing filename completion (see READLINE below). A filename whose suffix matches one of the entries in FIGNORE is excluded from the list of matched filenames. A sample value is ".o:~". \\
 
-MAIL
+GLOBIGNORE &
+A colon-separated list of patterns defining the set of filenames to be ignored by pathname expansion. If a filename matched by a pathname expansion pattern also matches one of the patterns in GLOBIGNORE, it is removed from the list of matches. \\
 
-If this parameter is set to a file name and the MAILPATH variable is not set, bash informs the user of the arrival of mail in the specified file.
+HISTCONTROL &
+A colon-separated list of values controlling how commands are saved on the history list. If the list of values includes ignorespace, lines which begin with a space character are not saved in the history list. A value of ignoredups causes lines matching the previous history entry to not be saved. A value of ignoreboth is shorthand for ignorespace and ignoredups. A value of erasedups causes all previous lines matching the current line to be removed from the history list before that line is saved. Any value not in the above list is ignored. If HISTCONTROL is unset, or does not include a valid value, all lines read by the shell parser are saved on the history list, subject to the value of HISTIGNORE. The second and subsequent lines of a multi-line compound command are not tested, and are added to the history regardless of the value of HISTCONTROL. \\
 
-MAILCHECK
-Specifies how often (in seconds) bash checks for mail. The default is 60 seconds. When it is time to check for mail, the shell does so before displaying the primary prompt. If this variable is unset, or set to a value that is not a number greater than or equal to zero, the shell disables mail checking.
-MAILPATH
-A colon-separated list of file names to be checked for mail. The message to be printed when mail arrives in a particular file may be specified by separating the file name from the message with a '?'. When used in the text of the message, $_ expands to the name of the current mailfile. Example:
-MAILPATH='/var/mail/bfox?"You have mail":~/shell-mail?"$_ has mail!"'
-Bash supplies a default value for this variable, but the location of the user mail files that it uses is system dependent (e.g., /var/mail/$USER).
-OPTERR
-If set to the value 1, bash displays error messages generated by the getopts builtin command (see SHELL BUILTIN COMMANDS below). OPTERR is initialized to 1 each time the shell is invoked or a shell script is executed.
+HISTFILE &
+The name of the file in which command history is saved (see HISTORY below). The default value is ~/.bash\_history. If unset, the command history is not saved when an interactive shell exits. \\
 
-PATH
+HISTFILESIZE &
+The maximum number of lines contained in the history file. When this variable is assigned a value, the history file is truncated, if necessary, by removing the oldest entries, to contain no more than that number of lines. The default value is 500. The history file is also truncated to this size after writing it when an interactive shell exits. \\
 
-The search path for commands. It is a colon-separated list of directories in which the shell looks for commands (see COMMAND EXECUTION below). A zero-length (null) directory name in the value of PATH indicates the current directory. A null directory name may appear as two adjacent colons, or as an initial or trailing colon. The default path is system-dependent, and is set by the administrator who installs bash. A common value is ''/usr/gnu/bin:/usr/local/bin:/usr/ucb:/bin:/usr/bin''.
+HISTIGNORE &
+A colon-separated list of patterns used to decide which command lines should be saved on the history list. Each pattern is anchored at the beginning of the line and must match the complete line (no implicit '*' is appended). Each pattern is tested against the line after the checks specified by HISTCONTROL are applied. In addition to the normal shell pattern matching characters, \&' matches the previous history line. \&' may be escaped using a backslash; the backslash is removed before attempting a match. The second and subsequent lines of a multi-line compound command are not tested, and are added to the history regardless of the value of HISTIGNORE. \\
 
-POSIXLY_CORRECT
-If this variable is in the environment when bash starts, the shell enters posix mode before reading the startup files, as if the --posix invocation option had been supplied. If it is set while the shell is running, bash enables posix mode, as if the command set -o posix had been executed.
-PROMPT_COMMAND
-If set, the value is executed as a command prior to issuing each primary prompt.
-PROMPT_DIRTRIM
-If set to a number greater than zero, the value is used as the number of trailing directory components to retain when expanding the \w and \W prompt string escapes (see PROMPTING below). Characters removed are replaced with an ellipsis.
-PS1
-The value of this parameter is expanded (see PROMPTING below) and used as the primary prompt string. The default value is ''\s-\v\$ ''.
+HISTSIZE &
+The number of commands to remember in the command history (see HISTORY below). The default value is 500. \\
 
-PS2
+HISTTIMEFORMAT &
+If this variable is set and not null, its value is used as a format string for strftime(3) to print the time stamp associated with each history entry displayed by the history builtin. If this variable is set, time stamps are written to the history file so they may be preserved across shell sessions. This uses the history comment character to distinguish timestamps from other history lines. \\
 
-The value of this parameter is expanded as with PS1 and used as the secondary prompt string. The default is ''> ''.
+HOME &
+The home directory of the current user; the default argument for the cd builtin command. The value of this variable is also used when performing tilde expansion. \\
 
-PS3
+HOSTFILE &
+Contains the name of a file in the same format as /etc/hosts that should be read when the shell needs to complete a hostname. The list of possible hostname completions may be changed while the shell is running; the next time hostname completion is attempted after the value is changed, bash adds the contents of the new file to the existing list. If HOSTFILE is set, but has no value, or does not name a readable file, bash attempts to read \url{/etc/hosts} to obtain the list of possible hostname completions. When HOSTFILE is unset, the hostname list is cleared. \\
 
-The value of this parameter is used as the prompt for the select command (see SHELL GRAMMAR above).
+IFS &
+The Internal Field Separator that is used for word splitting after expansion and to split lines into words with the read builtin command. The default value is ''<space><tab><newline>''. \\
 
-PS4
+IGNOREEOF &
+Controls the action of an interactive shell on receipt of an EOF character as the sole input. If set, the value is the number of consecutive EOF characters which must be typed as the first characters on an input line before bash exits. If the variable exists but does not have a numeric value, or has no value, the default value is 10. If it does not exist, EOF signifies the end of input to the shell. \\
 
-The value of this parameter is expanded as with PS1 and the value is printed before each command bash displays during an execution trace. The first character of PS4 is replicated multiple times, as necessary, to indicate multiple levels of indirection. The default is ''+ ''.
+INPUTRC &
+The filename for the readline startup file, overriding the default of ~/.inputrc \hyperref[sec:readline]{(see READLINE below)}. \\
 
-SHELL
+LANG &
+Used to determine the locale category for any category not specifically selected with a variable starting with LC\_. \\
 
-The full pathname to the shell is kept in this environment variable. If it is not set when the shell starts, bash assigns to it the full pathname of the current user's login shell.
+LC\_ALL &
 
-TIMEFORMAT
-The value of this parameter is used as a format string specifying how the timing information for pipelines prefixed with the time reserved word should be displayed. The % character introduces an escape sequence that is expanded to a time value or other information. The escape sequences and their meanings are as follows; the braces denote optional portions.
-%%
-A literal %.
+This variable overrides the value of LANG and any other LC\_ variable specifying a locale category. \\
 
-%[p][l]R
+LC\_COLLATE &
+This variable determines the collation order used when sorting the results of pathname expansion, and determines the behavior of range expressions, equivalence classes, and collating sequences within pathname expansion and pattern matching. \\
+
+LC\_CTYPE &
+This variable determines the interpretation of characters and the behavior of character classes within pathname expansion and pattern matching. \\
+
+LC\_MESSAGES &
+This variable determines the locale used to translate double-quoted strings preceded by a \$. \\
+
+LC\_NUMERIC &
+This variable determines the locale category used for number formatting. \\
+
+LINES &
+Used by the select builtin command to determine the column length for printing selection lists. Automatically set upon receipt of a SIGWINCH. \\
+
+MAIL &
+If this parameter is set to a file name and the MAILPATH variable is not set, bash informs the user of the arrival of mail in the specified file. \\
+
+MAILCHECK &
+Specifies how often (in seconds) bash checks for mail. The default is 60 seconds. When it is time to check for mail, the shell does so before displaying the primary prompt. If this variable is unset, or set to a value that is not a number greater than or equal to zero, the shell disables mail checking. \\
+
+MAILPATH &
+A colon-separated list of file names to be checked for mail. The message to be printed when mail arrives in a particular file may be specified by separating the file name from the message with a '?'. When used in the text of the message, \$\_ expands to the name of the current mailfile. Example:
+\begin{lstlisting}
+MAILPATH='/var/mail/bfox?"You have mail":~/shell-mail?"\$\_ has mail!"'
+\end{lstlisting}
+Bash supplies a default value for this variable, but the location of the user mail files that it uses is system dependent (e.g., \url{/var/mail/\$USER}). \\
+
+OPTERR &
+If set to the value 1, bash displays error messages generated by the getopts builtin command (see SHELL BUILTIN COMMANDS below). OPTERR is initialized to 1 each time the shell is invoked or a shell script is executed. \\
+
+PATH &
+The search path for commands. It is a colon-separated list of directories in which the shell looks for commands \hyperref[sec:commandexecution]{(see COMMAND EXECUTION below)}. A zero-length (null) directory name in the value of PATH indicates the current directory. A null directory name may appear as two adjacent colons, or as an initial or trailing colon. The default path is system-dependent, and is set by the administrator who installs bash. A common value is \url{''/usr/gnu/bin:/usr/local/bin:/usr/ucb:/bin:/usr/bin''}. \\
+
+POSIXLY\_CORRECT &
+If this variable is in the environment when bash starts, the shell enters posix mode before reading the startup files, as if the --posix invocation option had been supplied. If it is set while the shell is running, bash enables posix mode, as if the command set -o posix had been executed. \\
+
+PROMPT\_COMMAND&
+If set, the value is executed as a command prior to issuing each primary prompt. \\
+
+PROMPT\_DIRTRIM &
+If set to a number greater than zero, the value is used as the number of trailing directory components to retain when expanding the \textbackslash w and \textbackslash W prompt string escapes (see PROMPTING below). Characters removed are replaced with an ellipsis. \\
+
+PS1 &
+The value of this parameter is expanded (see PROMPTING below) and used as the primary prompt string. The default value is ''\textbackslash s-\textbackslash v\$ ''. \\
+
+PS2 &
+The value of this parameter is expanded as with PS1 and used as the secondary prompt string. The default is ''> ''. \\
+
+PS3 &
+The value of this parameter is used as the prompt for the select command \hyperref[sec:shellgrammar]{(see SHELL GRAMMAR above)}. \\
+
+PS4 &
+The value of this parameter is expanded as with PS1 and the value is printed before each command bash displays during an execution trace. The first character of PS4 is replicated multiple times, as necessary, to indicate multiple levels of indirection. The default is ''+ ''. \\
+
+SHELL &
+The full pathname to the shell is kept in this environment variable. If it is not set when the shell starts, bash assigns to it the full pathname of the current user's login shell. \\
+
+TIMEFORMAT &
+The value of this parameter is used as a format string specifying how the timing information for pipelines prefixed with the time reserved word should be displayed. The \% character introduces an escape sequence that is expanded to a time value or other information. The escape sequences and their meanings are as follows; the braces denote optional portions.
+    \%\%
+A literal \%.
+
+    \%[p][l]R
 
 The elapsed time in seconds.
 
-%[p][l]U
+    \%[p][l]U
 
 The number of CPU seconds spent in user mode.
 
-%[p][l]S
+    \%[p][l]S
 
 The number of CPU seconds spent in system mode.
 
-%P
+    \%P
 
-The CPU percentage, computed as (%U + %S) / %R.
+The CPU percentage, computed as (\%U + \%S) / \%R.
 
 The optional p is a digit specifying the precision, the number of fractional digits after a decimal point. A value of 0 causes no decimal point or fraction to be output. At most three places after the decimal point may be specified; values of p greater than 3 are changed to 3. If p is not specified, the value 3 is used.
 The optional l specifies a longer format, including minutes, of the form MMmSS.FFs. The value of p determines whether or not the fraction is included.
 
-If this variable is not set, bash acts as if it had the value $'\nreal\t%3lR\nuser\t%3lU\nsys%3lS'. If the value is null, no timing information is displayed. A trailing newline is added when the format string is displayed.
+If this variable is not set, bash acts as if it had the value 
+\begin{lstlisting}
+    \$'\nreal\t\%3lR\nuser\t\%3lU\nsys\%3lS'
+\end{lstlisting}
+        
+If the value is null, no timing information is displayed. A trailing newline is added when the format string is displayed. \\
 
-TMOUT
-If set to a value greater than zero, TMOUT is treated as the default timeout for the read builtin. The select command terminates if input does not arrive after TMOUT seconds when input is coming from a terminal. In an interactive shell, the value is interpreted as the number of seconds to wait for input after issuing the primary prompt. Bash terminates after waiting for that number of seconds if input does not arrive.
+TMOUT &
+If set to a value greater than zero, TMOUT is treated as the default timeout for the read builtin. The select command terminates if input does not arrive after TMOUT seconds when input is coming from a terminal. In an interactive shell, the value is interpreted as the number of seconds to wait for input after issuing the primary prompt. Bash terminates after waiting for that number of seconds if input does not arrive. \\
 
 TMPDIR
 
 If set, Bash uses its value as the name of a directory in which Bash creates temporary files for the shell's use.
 
-auto_resume
-This variable controls how the shell interacts with the user and job control. If this variable is set, single word simple commands without redirections are treated as candidates for resumption of an existing stopped job. There is no ambiguity allowed; if there is more than one job beginning with the string typed, the job most recently accessed is selected. The name of a stopped job, in this context, is the command line used to start it. If set to the value exact, the string supplied must match the name of a stopped job exactly; if set to substring, the string supplied needs to match a substring of the name of a stopped job. The substring value provides functionality analogous to the %? job identifier (see JOB CONTROL below). If set to any other value, the supplied string must be a prefix of a stopped job's name; this provides functionality analogous to the %string job identifier.
+auto\_resume &
+This variable controls how the shell interacts with the user and job control. If this variable is set, single word simple commands without redirections are treated as candidates for resumption of an existing stopped job. There is no ambiguity allowed; if there is more than one job beginning with the string typed, the job most recently accessed is selected. The name of a stopped job, in this context, is the command line used to start it. If set to the value exact, the string supplied must match the name of a stopped job exactly; if set to substring, the string supplied needs to match a substring of the name of a stopped job. The substring value provides functionality analogous to the \%? job identifier (see JOB CONTROL below). If set to any other value, the supplied string must be a prefix of a stopped job's name; this provides functionality analogous to the \%string job identifier. \\
+
 histchars
-The two or three characters which control history expansion and tokenization (see HISTORY EXPANSION below). The first character is the history expansion character, the character which signals the start of a history expansion, normally '!'. The second character is the quick substitution character, which is used as shorthand for re-running the previous command entered, substituting one string for another in the command. The default is '^'. The optional third character is the character which indicates that the remainder of the line is a comment when found as the first character of a word, normally '#'. The history comment character causes history substitution to be skipped for the remaining words on the line. It does not necessarily cause the shell parser to treat the rest of the line as a comment.
+The two or three characters which control history expansion and tokenization (see HISTORY EXPANSION below). The first character is the history expansion character, the character which signals the start of a history expansion, normally '!'. The second character is the quick substitution character, which is used as shorthand for re-running the previous command entered, substituting one string for another in the command. The default is '^'. The optional third character is the character which indicates that the remainder of the line is a comment when found as the first character of a word, normally '\#'. The history comment character causes history substitution to be skipped for the remaining words on the line. It does not necessarily cause the shell parser to treat the rest of the line as a comment.
 Arrays
 
 Bash provides one-dimensional indexed and associative array variables. Any variable may be used as an indexed array; the declare builtin will explicitly declare an array. There is no maximum limit on the size of an array, nor any requirement that members be indexed or assigned contiguously. Indexed arrays are referenced using integers (including arithmetic expressions) and are zero-based; associative arrays are referenced using arbitrary strings.
@@ -699,7 +780,7 @@ When assigning to an associative array, the subscript is required.
 
 This syntax is also accepted by the declare builtin. Individual array elements may be assigned to using the name[subscript]=value syntax introduced above.
 
-Any element of an array may be referenced using ${name[subscript]}. The braces are required to avoid conflicts with pathname expansion. If subscript is @ or *, the word expands to all members of name. These subscripts differ only when the word appears within double quotes. If the word is double-quoted, ${name[*]} expands to a single word with the value of each array member separated by the first character of the IFS special variable, and ${name[@]} expands each element of name to a separate word. When there are no array members, ${name[@]} expands to nothing. If the double-quoted expansion occurs within a word, the expansion of the first parameter is joined with the beginning part of the original word, and the expansion of the last parameter is joined with the last part of the original word. This is analogous to the expansion of the special parameters * and @ (see Special Parameters above). ${#name[subscript]} expands to the length of ${name[subscript]}. If subscript is * or @, the expansion is the number of elements in the array. Referencing an array variable without a subscript is equivalent to referencing the array with a subscript of 0.
+Any element of an array may be referenced using \${name[subscript]}. The braces are required to avoid conflicts with pathname expansion. If subscript is @ or *, the word expands to all members of name. These subscripts differ only when the word appears within double quotes. If the word is double-quoted, \${name[*]} expands to a single word with the value of each array member separated by the first character of the IFS special variable, and \${name[@]} expands each element of name to a separate word. When there are no array members, \${name[@]} expands to nothing. If the double-quoted expansion occurs within a word, the expansion of the first parameter is joined with the beginning part of the original word, and the expansion of the last parameter is joined with the last part of the original word. This is analogous to the expansion of the special parameters * and @ (see Special Parameters above). \${\#name[subscript]} expands to the length of \${name[subscript]}. If subscript is * or @, the expansion is the number of elements in the array. Referencing an array variable without a subscript is equivalent to referencing the array with a subscript of 0.
 
 An array variable is considered set if a subscript has been assigned a value. The null string is a valid value.
 
@@ -707,15 +788,14 @@ The unset builtin is used to destroy arrays. unset name[subscript] destroys the 
 
 The declare, local, and readonly builtins each accept a -a option to specify an indexed array and a -A option to specify an associative array. The read builtin accepts a -a option to assign a list of words read from the standard input to an array. The set and declare builtins display array values in a way that allows them to be reused as assignments.
 
-\section{Expansion}
-\label{sec:expansion}
+\section{Expansion}\label{sec:expansion}
 Expansion is performed on the command line after it has been split into words. There are seven kinds of expansion performed: brace expansion, tilde expansion, parameter and variable expansion, command substitution, arithmetic expansion, word splitting, and pathname expansion.
 
 The order of expansions is: brace expansion, tilde expansion, parameter, variable and arithmetic expansion and command substitution (done in a left-to-right fashion), word splitting, and pathname expansion.
 
 On systems that can support it, there is an additional expansion available: process substitution.
 
-Only brace expansion, word splitting, and pathname expansion can change the number of words of the expansion; other expansions expand a single word to a single word. The only exceptions to this are the expansions of "$@" and "${name[@]}" as explained above (see PARAMETERS).
+Only brace expansion, word splitting, and pathname expansion can change the number of words of the expansion; other expansions expand a single word to a single word. The only exceptions to this are the expansions of "\$@" and "\${name[@]}" as explained above (see PARAMETERS).
 
 Brace Expansion
 
@@ -726,7 +806,7 @@ A sequence expression takes the form {x..y[..incr]}, where x and y are either in
 
 Brace expansion is performed before any other expansions, and any characters special to other expansions are preserved in the result. It is strictly textual. Bash does not apply any syntactic interpretation to the context of the expansion or the text between the braces.
 
-A correctly-formed brace expansion must contain unquoted opening and closing braces, and at least one unquoted comma or a valid sequence expression. Any incorrectly formed brace expansion is left unchanged. A { or , may be quoted with a backslash to prevent its being considered part of a brace expression. To avoid conflicts with parameter expansion, the string ${ is not considered eligible for brace expansion.
+A correctly-formed brace expansion must contain unquoted opening and closing braces, and at least one unquoted comma or a valid sequence expression. Any incorrectly formed brace expansion is left unchanged. A { or , may be quoted with a backslash to prevent its being considered part of a brace expression. To avoid conflicts with parameter expansion, the string \${ is not considered eligible for brace expansion.
 
 This construct is typically used as shorthand when the common prefix of the strings to be generated is longer than in the above example:
 
@@ -745,12 +825,12 @@ Each variable assignment is checked for unquoted tilde-prefixes immediately foll
 
 Parameter Expansion
 
-The '$' character introduces parameter expansion, command substitution, or arithmetic expansion. The parameter name or symbol to be expanded may be enclosed in braces, which are optional but serve to protect the variable to be expanded from characters immediately following it which could be interpreted as part of the name.
+The '\$' character introduces parameter expansion, command substitution, or arithmetic expansion. The parameter name or symbol to be expanded may be enclosed in braces, which are optional but serve to protect the variable to be expanded from characters immediately following it which could be interpreted as part of the name.
 When braces are used, the matching ending brace is the first '}' not escaped by a backslash or within a quoted string, and not within an embedded arithmetic expansion, command substitution, or parameter expansion.
 
-${parameter}
+\${parameter}
 The value of parameter is substituted. The braces are required when parameter is a positional parameter with more than one digit, or when parameter is followed by a character which is not to be interpreted as part of its name.
-If the first character of parameter is an exclamation point (!), a level of variable indirection is introduced. Bash uses the value of the variable formed from the rest of parameter as the name of the variable; this variable is then expanded and that value is used in the rest of the substitution, rather than the value of parameter itself. This is known as indirect expansion. The exceptions to this are the expansions of ${!prefix*} and ${!name[@]} described below. The exclamation point must immediately follow the left brace in order to introduce indirection.
+If the first character of parameter is an exclamation point (!), a level of variable indirection is introduced. Bash uses the value of the variable formed from the rest of parameter as the name of the variable; this variable is then expanded and that value is used in the rest of the substitution, rather than the value of parameter itself. This is known as indirect expansion. The exceptions to this are the expansions of \${!prefix*} and \${!name[@]} described below. The exclamation point must immediately follow the left brace in order to introduce indirection.
 In each of the cases below, word is subject to tilde expansion, parameter expansion, command substitution, and arithmetic expansion.
 
 When not performing substring expansion, using the forms documented below, bash tests for a parameter that is unset or null. Omitting the colon results in a test only for a parameter that is unset.
@@ -765,7 +845,7 @@ ${parameter:+word}
 Use Alternate Value. If parameter is null or unset, nothing is substituted, otherwise the expansion of word is substituted.
 ${parameter:offset}
 ${parameter:offset:length}
-Substring Expansion. Expands to up to length characters of parameter starting at the character specified by offset. If length is omitted, expands to the substring of parameter starting at the character specified by offset. length and offset are arithmetic expressions (see ARITHMETIC EVALUATION below). length must evaluate to a number greater than or equal to zero. If offset evaluates to a number less than zero, the value is used as an offset from the end of the value of parameter. If parameter is @, the result is length positional parameters beginning at offset. If parameter is an indexed array name subscripted by @ or *, the result is the length members of the array beginning with ${parameter[offset]}. A negative offset is taken relative to one greater than the maximum index of the specified array. Substring expansion applied to an associative array produces undefined results. Note that a negative offset must be separated from the colon by at least one space to avoid being confused with the :- expansion. Substring indexing is zero-based unless the positional parameters are used, in which case the indexing starts at 1 by default. If offset is 0, and the positional parameters are used, $0 is prefixed to the list.
+Substring Expansion. Expands to up to length characters of parameter starting at the character specified by offset. If length is omitted, expands to the substring of parameter starting at the character specified by offset. length and offset are arithmetic expressions (see ARITHMETIC EVALUATION below). length must evaluate to a number greater than or equal to zero. If offset evaluates to a number less than zero, the value is used as an offset from the end of the value of parameter. If parameter is @, the result is length positional parameters beginning at offset. If parameter is an indexed array name subscripted by @ or *, the result is the length members of the array beginning with \${parameter[offset]}. A negative offset is taken relative to one greater than the maximum index of the specified array. Substring expansion applied to an associative array produces undefined results. Note that a negative offset must be separated from the colon by at least one space to avoid being confused with the :- expansion. Substring indexing is zero-based unless the positional parameters are used, in which case the indexing starts at 1 by default. If offset is 0, and the positional parameters are used, \$0 is prefixed to the list.
 ${!prefix*}
 ${!prefix@}
 Names matching prefix. Expands to the names of variables whose names begin with prefix, separated by the first character of the IFS special variable. When @ is used and the expansion appears within double quotes, each variable name expands to a separate word.
@@ -793,8 +873,8 @@ Command substitution allows the output of a command to replace the command name.
 $(command)
 or
 `command`
-Bash performs the expansion by executing command and replacing the command substitution with the standard output of the command, with any trailing newlines deleted. Embedded newlines are not deleted, but they may be removed during word splitting. The command substitution $(cat file) can be replaced by the equivalent but faster $(< file).
-When the old-style backquote form of substitution is used, backslash retains its literal meaning except when followed by $, `, or \. The first backquote not preceded by a backslash terminates the command substitution. When using the $(command) form, all characters between the parentheses make up the command; none are treated specially.
+Bash performs the expansion by executing command and replacing the command substitution with the standard output of the command, with any trailing newlines deleted. Embedded newlines are not deleted, but they may be removed during word splitting. The command substitution \$(cat file) can be replaced by the equivalent but faster \$(< file).
+When the old-style backquote form of substitution is used, backslash retains its literal meaning except when followed by \$, `, or \. The first backquote not preceded by a backslash terminates the command substitution. When using the \$(command) form, all characters between the parentheses make up the command; none are treated specially.
 
 Command substitutions may be nested. To nest when using the backquoted form, escape the inner backquotes with backslashes.
 
@@ -869,7 +949,7 @@ Matches anything except one of the given patterns
 Quote Removal
 
 After the preceding expansions, all unquoted occurrences of the characters \, ', and " that did not result from one of the above expansions are removed.
-Redirection
+\section{Redirection}\label{sec:redirection}
 Before a command is executed, its input and output may be redirected using a special notation interpreted by the shell. Redirection may also be used to open and close files for the current shell execution environment. The following redirection operators may precede or appear anywhere within a simple command or may follow a command. Redirections are processed in the order they appear, from left to right.
 
 Each redirection that may be preceded by a file descriptor number may instead be preceded by a word of the form {varname}. In this case, for each redirection operator except \&- and \&-, the shell will allocate a file descriptor greater than 10 and assign it to varname. If \&- or \&- is preceded by {varname}, the value of varname defines the file descriptor to close.
@@ -984,7 +1064,7 @@ The redirection operator
 [n]<>word
 causes the file whose name is the expansion of word to be opened for both reading and writing on file descriptor n, or on file descriptor 0 if n is not specified. If the file does not exist, it is created.
 Aliases
-Aliases allow a string to be substituted for a word when it is used as the first word of a simple command. The shell maintains a list of aliases that may be set and unset with the alias and unalias builtin commands (see SHELL BUILTIN COMMANDS below). The first word of each simple command, if unquoted, is checked to see if it has an alias. If so, that word is replaced by the text of the alias. The characters /, $, `, and = and any of the shell metacharacters or quoting characters listed above may not appear in an alias name. The replacement text may contain any valid shell input, including shell metacharacters. The first word of the replacement text is tested for aliases, but a word that is identical to an alias being expanded is not expanded a second time. This means that one may alias ls to ls -F, for instance, and bash does not try to recursively expand the replacement text. If the last character of the alias value is a blank, then the next command word following the alias is also checked for alias expansion.
+Aliases allow a string to be substituted for a word when it is used as the first word of a simple command. The shell maintains a list of aliases that may be set and unset with the alias and unalias builtin commands (see SHELL BUILTIN COMMANDS below). The first word of each simple command, if unquoted, is checked to see if it has an alias. If so, that word is replaced by the text of the alias. The characters /, \$, `, and = and any of the shell metacharacters or quoting characters listed above may not appear in an alias name. The replacement text may contain any valid shell input, including shell metacharacters. The first word of the replacement text is tested for aliases, but a word that is identical to an alias being expanded is not expanded a second time. This means that one may alias ls to ls -F, for instance, and bash does not try to recursively expand the replacement text. If the last character of the alias value is a blank, then the next command word following the alias is also checked for alias expansion.
 
 Aliases are created and listed with the alias command, and removed with the unalias command.
 
@@ -1205,7 +1285,7 @@ The shell has an execution environment, which consists of the following:
 
 â€¢ shell aliases defined with alias
 
-â€¢ various process IDs, including those of background jobs, the value of $$, and the value of PPID
+â€¢ various process IDs, including those of background jobs, the value of \$\$, and the value of PPID
 
 When a simple command other than a builtin or shell function is to be executed, it is invoked in a separate execution environment that consists of the following. Unless otherwise noted, the values are inherited from the shell.
 â€¢ the shell's open files, plus any modifications and additions specified by redirections to the command
@@ -1320,7 +1400,7 @@ carriage return
 
 \s
 
-the name of the shell, the basename of $0 (the portion following the final slash)
+the name of the shell, the basename of \$0 (the portion following the final slash)
 
 \t
 
@@ -1352,11 +1432,11 @@ the release of bash, version + patch level (e.g., 2.00.0)
 
 \w
 
-the current working directory, with $HOME abbreviated with a tilde (uses the value of the PROMPT_DIRTRIM variable)
+the current working directory, with \$HOME abbreviated with a tilde (uses the value of the PROMPT_DIRTRIM variable)
 
 \W
 
-the basename of the current working directory, with $HOME abbreviated with a tilde
+the basename of the current working directory, with \$HOME abbreviated with a tilde
 
 \!
 
@@ -1368,7 +1448,7 @@ the command number of this command
 
 \$
 
-if the effective UID is 0, a #, otherwise a $
+if the effective UID is 0, a #, otherwise a \$
 
 \nnn
 
@@ -1399,7 +1479,7 @@ When a command is described as killing text, the text deleted is saved for possi
 
 Readline Initialization
 
-Readline is customized by putting commands in an initialization file (the inputrc file). The name of this file is taken from the value of the INPUTRC variable. If that variable is unset, the default is ~/.inputrc. When a program which uses the readline library starts up, the initialization file is read, and the key bindings and variables are set. There are only a few basic constructs allowed in the readline initialization file. Blank lines are ignored. Lines beginning with a # are comments. Lines beginning with a $ indicate conditional constructs. Other lines denote key bindings and variable settings.
+Readline is customized by putting commands in an initialization file (the inputrc file). The name of this file is taken from the value of the INPUTRC variable. If that variable is unset, the default is ~/.inputrc. When a program which uses the readline library starts up, the initialization file is read, and the key bindings and variables are set. There are only a few basic constructs allowed in the readline initialization file. Blank lines are ignored. Lines beginning with a # are comments. Lines beginning with a \$ indicate conditional constructs. Other lines denote key bindings and variable settings.
 The default key-bindings may be changed with an inputrc file. Other programs that use this library may add their own commands and bindings.
 
 For example, placing
@@ -1566,10 +1646,10 @@ Readline Conditional Constructs
 
 Readline implements a facility similar in spirit to the conditional compilation features of the C preprocessor which allows key bindings and variable settings to be performed as the result of tests. There are four parser directives used.
 $if
-The $if construct allows bindings to be made based on the editing mode, the terminal being used, or the application using readline. The text of the test extends to the end of the line; no characters are required to isolate it.
+The \$if construct allows bindings to be made based on the editing mode, the terminal being used, or the application using readline. The text of the test extends to the end of the line; no characters are required to isolate it.
 
 mode
-The mode= form of the $if directive is used to test whether readline is in emacs or vi mode. This may be used in conjunction with the set keymap command, for instance, to set bindings in the emacs-standard and emacs-ctlx keymaps only if readline is starting out in emacs mode.
+The mode= form of the \$if directive is used to test whether readline is in emacs or vi mode. This may be used in conjunction with the set keymap command, for instance, to set bindings in the emacs-standard and emacs-ctlx keymaps only if readline is starting out in emacs mode.
 
 term
 
@@ -1583,11 +1663,11 @@ $if Bash
 "\C-xq": "\eb\"\ef\""
 $endif
 $endif
-This command, as seen in the previous example, terminates an $if command.
+This command, as seen in the previous example, terminates an \$if command.
 
 $else
 
-Commands in this branch of the $if directive are executed if the test fails.
+Commands in this branch of the \$if directive are executed if the test fails.
 
 $include
 This directive takes a single filename as an argument and reads commands and bindings from that file. For example, the following directive would read /etc/inputrc:
@@ -1655,7 +1735,7 @@ Search backward through the history for the string of characters between the sta
 yank-nth-arg (M-C-y)
 Insert the first argument to the previous command (usually the second word on the previous line) at point. With an argument n, insert the nth word from the previous command (the words in the previous command begin with word 0). A negative argument inserts the nth word from the end of the previous command. Once the argument n is computed, the argument is extracted as if the "!n" history expansion had been specified.
 yank-last-arg (M-., M-_)
-Insert the last argument to the previous command (the last word of the previous history entry). With an argument, behave exactly like yank-nth-arg. Successive calls to yank-last-arg move back through the history list, inserting the last argument of each line in turn. The history expansion facilities are used to extract the last argument, as if the "!$" history expansion had been specified.
+Insert the last argument to the previous command (the last word of the previous history entry). With an argument, behave exactly like yank-nth-arg. Successive calls to yank-last-arg move back through the history list, inserting the last argument of each line in turn. The history expansion facilities are used to extract the last argument, as if the "!\$" history expansion had been specified.
 shell-expand-line (M-C-e)
 Expand the line as the shell does. This performs alias and history expansion as well as all of the shell word expansions. See HISTORY EXPANSION below for a description of history expansion.
 history-expand-line (M-^)
@@ -1671,7 +1751,7 @@ A synonym for yank-last-arg.
 operate-and-get-next (C-o)
 Accept the current line for execution and fetch the next line relative to the current line from the history for editing. Any argument is ignored.
 edit-and-execute-command (C-xC-e)
-Invoke an editor on the current command line, and execute the result as shell commands. Bash attempts to invoke $VISUAL, $EDITOR, and emacs as the editor, in that order.
+Invoke an editor on the current command line, and execute the result as shell commands. Bash attempts to invoke \$VISUAL, \$EDITOR, and emacs as the editor, in that order.
 Commands for Changing Text
 
 delete-char (C-d)
@@ -1743,7 +1823,7 @@ This is another way to specify an argument. If this command is followed by one o
 Completing
 
 complete (TAB)
-Attempt to perform completion on the text before point. Bash attempts completion treating the text as a variable (if the text begins with $), username (if the text begins with ~), hostname (if the text begins with @), or command (including aliases and functions) in turn. If none of these produces a match, filename completion is attempted.
+Attempt to perform completion on the text before point. Bash attempts completion treating the text as a variable (if the text begins with \$), username (if the text begins with ~), hostname (if the text begins with @), or command (including aliases and functions) in turn. If none of these produces a match, filename completion is attempted.
 possible-completions (M-?)
 List the possible completions of the text before point.
 insert-completions (M-*)
@@ -1762,9 +1842,9 @@ complete-username (M-~)
 Attempt completion on the text before point, treating it as a username.
 possible-username-completions (C-x ~)
 List the possible completions of the text before point, treating it as a username.
-complete-variable (M-$)
+complete-variable (M-\$)
 Attempt completion on the text before point, treating it as a shell variable.
-possible-variable-completions (C-x $)
+possible-variable-completions (C-x \$)
 List the possible completions of the text before point, treating it as a shell variable.
 complete-hostname (M-@)
 Attempt completion on the text before point, treating it as a hostname.
@@ -1865,22 +1945,28 @@ There is some support for dynamically modifying completions. This is most useful
 
 For instance, assuming that there is a library of compspecs, each kept in a file corresponding to the name of the command, the following default completion function would load completions dynamically:
 
+\begin{lstlisting}
+
+
 _completion_loader()
 {
 
-. "/etc/bash\_completion.d/$1.sh" >/dev/null 2\&1\&& return 124
+. "/etc/bash\_completion.d/\$1.sh" >/dev/null 2\&1\&\& return 124
 }
+\end{lstlisting}
+
 complete -D -F _completion_loader
-History
+
+\section{History}\label{sec:history}
 When the -o history option to the set builtin is enabled, the shell provides access to the command history, the list of commands previously typed. The value of the HISTSIZE variable is used as the number of commands to save in a history list. The text of the last HISTSIZE commands (default 500) is saved. The shell stores each command in the history list prior to parameter and variable expansion (see EXPANSION above) but after history expansion is performed, subject to the values of the shell variables HISTIGNORE and HISTCONTROL.
 
-On startup, the history is initialized from the file named by the variable HISTFILE (default ~/.bash\_history). The file named by the value of HISTFILE is truncated, if necessary, to contain no more than the number of lines specified by the value of HISTFILESIZE. When the history file is read, lines beginning with the history comment character followed immediately by a digit are interpreted as timestamps for the preceding history line. These timestamps are optionally displayed depending on the value of the HISTTIMEFORMAT variable. When an interactive shell exits, the last $HISTSIZE lines are copied from the history list to $HISTFILE. If the histappend shell option is enabled (see the description of shopt under SHELL BUILTIN COMMANDS below), the lines are appended to the history file, otherwise the history file is overwritten. If HISTFILE is unset, or if the history file is unwritable, the history is not saved. If the HISTTIMEFORMAT variable is set, time stamps are written to the history file, marked with the history comment character, so they may be preserved across shell sessions. This uses the history comment character to distinguish timestamps from other history lines. After saving the history, the history file is truncated to contain no more than HISTFILESIZE lines. If HISTFILESIZE is not set, no truncation is performed.
+On startup, the history is initialized from the file named by the variable HISTFILE (default ~/.bash\_history). The file named by the value of HISTFILE is truncated, if necessary, to contain no more than the number of lines specified by the value of HISTFILESIZE. When the history file is read, lines beginning with the history comment character followed immediately by a digit are interpreted as timestamps for the preceding history line. These timestamps are optionally displayed depending on the value of the HISTTIMEFORMAT variable. When an interactive shell exits, the last \$HISTSIZE lines are copied from the history list to \$HISTFILE. If the histappend shell option is enabled (see the description of shopt under SHELL BUILTIN COMMANDS below), the lines are appended to the history file, otherwise the history file is overwritten. If HISTFILE is unset, or if the history file is unwritable, the history is not saved. If the HISTTIMEFORMAT variable is set, time stamps are written to the history file, marked with the history comment character, so they may be preserved across shell sessions. This uses the history comment character to distinguish timestamps from other history lines. After saving the history, the history file is truncated to contain no more than HISTFILESIZE lines. If HISTFILESIZE is not set, no truncation is performed.
 
 The builtin command fc (see SHELL BUILTIN COMMANDS below) may be used to list or edit and re-execute a portion of the history list. The history builtin may be used to display or modify the history list and manipulate the history file. When using command-line editing, search commands are available in each editing mode that provide access to the history list.
 
 The shell allows control over which commands are saved on the history list. The HISTCONTROL and HISTIGNORE variables may be set to cause the shell to save only a subset of the commands entered. The cmdhist shell option, if enabled, causes the shell to attempt to save each line of a multi-line command in the same history entry, adding semicolons where necessary to preserve syntactic correctness. The lithist shell option causes the shell to save the command with embedded newlines instead of semicolons. See the description of the shopt builtin below under SHELL BUILTIN COMMANDS for information on setting and unsetting shell options.
 
-History Expansion
+\subsection{History Expansion}\label{sec:historyexpansion}
 The shell supports a history expansion feature that is similar to the history expansion in csh. This section describes what syntax features are available. This feature is enabled by default for interactive shells, and can be disabled using the +H option to the set builtin command (see SHELL BUILTIN COMMANDS below). Non-interactive shells do not perform history expansion by default.
 
 History expansions introduce words from the history list into the input stream, making it easy to repeat commands, insert the arguments to a previous command into the current input line, or fix errors in previous commands quickly.
@@ -1922,7 +2008,7 @@ The entire command line typed so far.
 
 Word Designators
 
-Word designators are used to select desired words from the event. A : separates the event specification from the word designator. It may be omitted if the word designator begins with a ^, $, *, -, or %. Words are numbered from the beginning of the line, with the first word being denoted by 0 (zero). Words are inserted into the current line separated by single spaces.
+Word designators are used to select desired words from the event. A : separates the event specification from the word designator. It may be omitted if the word designator begins with a ^, \$, *, -, or %. Words are numbered from the beginning of the line, with the first word being denoted by 0 (zero). Words are inserted into the current line separated by single spaces.
 0 (zero)
 The zeroth word. For the shell, this is the command word.
 n
@@ -1946,15 +2032,15 @@ A range of words; '-y' abbreviates '0-y'.
 
 *
 
-All of the words but the zeroth. This is a synonym for '1-$'. It is not an error to use * if there is just one word in the event; the empty string is returned in that case.
+All of the words but the zeroth. This is a synonym for '1-\$'. It is not an error to use * if there is just one word in the event; the empty string is returned in that case.
 
 x*
 
-Abbreviates x-$.
+Abbreviates x-\$.
 
 x-
 
-Abbreviates x-$ like x*, but omits the last word.
+Abbreviates x-\$ like x*, but omits the last word.
 
 If a word designator is supplied without an event specification, the previous command is used as the event.
 Modifiers
@@ -1989,7 +2075,7 @@ Quote the substituted words as with q, but break into words at blanks and newlin
 
 s/old/new/
 Substitute new for the first occurrence of old in the event line. Any delimiter can be used in place of /. The final delimiter is optional if it is the last character of the event line. The delimiter may be quoted in old and new with a single backslash. If\& appears in new, it is replaced by old. A single backslash will quote the\&. If old is null, it is set to the last old substituted, or, if no previous history substitutions took place, the last string in a !?string[?] search.
-&
+\&
 Repeat the previous substitution.
 
 g
@@ -2000,7 +2086,7 @@ G
 
 Apply the following 's' modifier once to each word in the event line.
 
-Shell Builtin Commands
+\section{Shell Builtin Commands}\label{sec:shellbuiltincommands}
 Unless otherwise noted, each builtin command documented in this section as accepting options preceded by - accepts -- to signify the end of the options. The :, true, false, and test builtins do not accept options and do not treat -- specially. The exit, logout, break, continue, let, and shift builtins accept and process arguments beginning with - without requiring --. Other builtins that accept arguments but are not specified as accepting options interpret arguments beginning with - as invalid options and require -- to prevent this interpretation.
 
 : [arguments]
@@ -2072,7 +2158,7 @@ Execute the specified shell builtin, passing it arguments, and return its exit s
 caller [expr]
 Returns the context of any active subroutine call (a shell function or a script executed with the . or source builtins. Without expr, caller displays the line number and source filename of the current subroutine call. If a non-negative integer is supplied as expr, caller displays the line number, subroutine name, and source file corresponding to that position in the current execution call stack. This extra information may be used, for example, to print a stack trace. The current frame is frame 0. The return value is 0 unless the shell is not executing a subroutine call or expr does not correspond to a valid position in the call stack.
 cd [-L|-P] [dir]
-Change the current directory to dir. The variable HOME is the default dir. The variable CDPATH defines the search path for the directory containing dir. Alternative directory names in CDPATH are separated by a colon (:). A null directory name in CDPATH is the same as the current directory, i.e., ''.''. If dir begins with a slash (/), then CDPATH is not used. The -P option says to use the physical directory structure instead of following symbolic links (see also the -P option to the set builtin command); the -L option forces symbolic links to be followed. An argument of - is equivalent to $OLDPWD. If a non-empty directory name from CDPATH is used, or if - is the first argument, and the directory change is successful, the absolute pathname of the new working directory is written to the standard output. The return value is true if the directory was successfully changed; false otherwise.
+Change the current directory to dir. The variable HOME is the default dir. The variable CDPATH defines the search path for the directory containing dir. Alternative directory names in CDPATH are separated by a colon (:). A null directory name in CDPATH is the same as the current directory, i.e., ''.''. If dir begins with a slash (/), then CDPATH is not used. The -P option says to use the physical directory structure instead of following symbolic links (see also the -P option to the set builtin command); the -L option forces symbolic links to be followed. An argument of - is equivalent to \$OLDPWD. If a non-empty directory name from CDPATH is used, or if - is the first argument, and the directory change is successful, the absolute pathname of the new working directory is written to the standard output. The return value is true if the directory was successfully changed; false otherwise.
 command [-pVv] command [arg ...]
 Run command with args suppressing the normal shell function lookup. Only builtin commands or commands found in the PATH are executed. If the -p option is given, the search for command is performed using a default value for PATH that is guaranteed to find all of the standard utilities. If either the -V or -v option is supplied, a description of command is printed. The -v option causes a single word indicating the command or file name used to invoke command to be displayed; the -V option produces a more verbose description. If the -V or -v option is supplied, the exit status is 0 if command was found, and 1 if not. If neither option is supplied and an error occurred or command cannot be found, the exit status is 127. Otherwise, the exit status of the command builtin is the exit status of command.
 compgen [option] [word]
@@ -2395,7 +2481,7 @@ If a required argument is not found, and getopts is not silent, a question mark 
 getopts returns true if an option, specified or unspecified, is found. It returns false if the end of options is encountered or an error occurs.
 
 hash [-lr] [-p filename] [-dt] [name]
-For each name, the full file name of the command is determined by searching the directories in $PATH and remembered. If the -p option is supplied, no path search is performed, and filename is used as the full file name of the command. The -r option causes the shell to forget all remembered locations. The -d option causes the shell to forget the remembered location of each name. If the -t option is supplied, the full pathname to which each name corresponds is printed. If multiple name arguments are supplied with -t, the name is printed before the hashed full pathname. The -l option causes output to be displayed in a format that may be reused as input. If no arguments are given, or if only -l is supplied, information about remembered commands is printed. The return status is true unless a name is not found or an invalid option is supplied.
+For each name, the full file name of the command is determined by searching the directories in \$PATH and remembered. If the -p option is supplied, no path search is performed, and filename is used as the full file name of the command. The -r option causes the shell to forget all remembered locations. The -d option causes the shell to forget the remembered location of each name. If the -t option is supplied, the full pathname to which each name corresponds is printed. If multiple name arguments are supplied with -t, the name is printed before the hashed full pathname. The -l option causes output to be displayed in a format that may be reused as input. If no arguments are given, or if only -l is supplied, information about remembered commands is printed. The return status is true unless a name is not found or an invalid option is supplied.
 help [-dms] [pattern]
 Display helpful information about builtin commands. If pattern is specified, help gives detailed help on all commands matching pattern; otherwise help for all the builtins and shell control structures is printed.
 -d
@@ -2601,7 +2687,7 @@ return [n]
 Causes a function to exit with the return value specified by n. If n is omitted, the return status is that of the last command executed in the function body. If used outside a function, but during execution of a script by the . (source) command, it causes the shell to stop executing that script and return either n or the exit status of the last command executed within the script as the exit status of the script. If used outside a function and not during execution of a script by ., the return status is false. Any command associated with the RETURN trap is executed before execution resumes after the function or script.
 set [--abefhkmnptuvxBCEHPT] [-o option] [arg ...]
 set [+abefhkmnptuvxBCEHPT] [+o option] [arg ...]
-Without options, the name and value of each shell variable are displayed in a format that can be reused as input for setting or resetting the currently-set variables. Read-only variables cannot be reset. In posix mode, only shell variables are listed. The output is sorted according to the current locale. When options are specified, they set or unset shell attributes. Any arguments remaining after option processing are treated as values for the positional parameters and are assigned, in order, to $1, $2, ... $n. Options, if specified, have the following meanings:
+Without options, the name and value of each shell variable are displayed in a format that can be reused as input for setting or resetting the currently-set variables. Read-only variables cannot be reset. In posix mode, only shell variables are listed. The output is sorted according to the current locale. When options are specified, they set or unset shell attributes. Any arguments remaining after option processing are treated as values for the positional parameters and are assigned, in order, to \$1, \$2, ... \$n. Options, if specified, have the following meanings:
 -a
 Automatically mark variables and functions which are modified or created for export to the environment of subsequent commands.
 
@@ -2743,7 +2829,7 @@ Same as -x.
 If -o is supplied with no option-name, the values of the current options are printed. If +o is supplied with no option-name, a series of set commands to recreate the current option settings is displayed on the standard output.
 
 -p
-Turn on privileged mode. In this mode, the $ENV and $bash\_ENV files are not processed, shell functions are not inherited from the environment, and the SHELLOPTS, BASHOPTS, CDPATH, and GLOBIGNORE variables, if they appear in the environment, are ignored. If the shell is started with the effective user (group) id not equal to the real user (group) id, and the -p option is not supplied, these actions are taken and the effective user id is set to the real user id. If the -p option is supplied at startup, the effective user id is not reset. Turning this option off causes the effective user and group ids to be set to the real user and group ids.
+Turn on privileged mode. In this mode, the \$ENV and \$bash\_ENV files are not processed, shell functions are not inherited from the environment, and the SHELLOPTS, BASHOPTS, CDPATH, and GLOBIGNORE variables, if they appear in the environment, are ignored. If the shell is started with the effective user (group) id not equal to the real user (group) id, and the -p option is not supplied, these actions are taken and the effective user id is set to the real user id. If the -p option is supplied at startup, the effective user id is not reset. Turning this option off causes the effective user and group ids to be set to the real user and group ids.
 
 -t
 
@@ -2793,9 +2879,9 @@ If no arguments follow this option, then the positional parameters are unset. Ot
 
 Signal the end of options, cause all remaining args to be assigned to the positional parameters. The -x and -v options are turned off. If there are no args, the positional parameters remain unchanged.
 
-The options are off by default unless otherwise noted. Using + rather than - causes these options to be turned off. The options can also be specified as arguments to an invocation of the shell. The current set of options may be found in $-. The return status is always true unless an invalid option is encountered.
+The options are off by default unless otherwise noted. Using + rather than - causes these options to be turned off. The options can also be specified as arguments to an invocation of the shell. The current set of options may be found in \$-. The return status is always true unless an invalid option is encountered.
 shift [n]
-The positional parameters from n+1 ... are renamed to $1 .... Parameters represented by the numbers $# down to $#-n+1 are unset. n must be a non-negative number less than or equal to $#. If n is 0, no parameters are changed. If n is not given, it is assumed to be 1. If n is greater than $#, the positional parameters are not changed. The return status is greater than zero if n is greater than $# or less than zero; otherwise 0.
+The positional parameters from n+1 ... are renamed to \$1 .... Parameters represented by the numbers \$# down to \$#-n+1 are unset. n must be a non-negative number less than or equal to \$#. If n is 0, no parameters are changed. If n is not given, it is assumed to be 1. If n is greater than \$#, the positional parameters are not changed. The return status is greater than zero if n is greater than \$# or less than zero; otherwise 0.
 shopt [-pqsu] [-o] [optname ...]
 Toggle the values of variables controlling optional shell behavior. With no options, or with the -p option, a list of all settable options is displayed, with an indication of whether or not each is set. The -p option causes output to be displayed in a form that may be reused as input. Other options have the following meanings:
 -s
@@ -2892,7 +2978,7 @@ If set, the extended pattern matching features
 
 described above under Pathname Expansion are enabled.
 extquote
-If set, $'string' and $"string" quoting is performed within ${parameter} expansions enclosed in double quotes. This option is enabled by default.
+If set, \$'string' and \$"string" quoting is performed within \${parameter} expansions enclosed in double quotes. This option is enabled by default.
 
 failglob
 If set, patterns which fail to match filenames during pathname expansion result in an expansion error.
@@ -3012,86 +3098,78 @@ If a sigspec is ERR, the command arg is executed whenever a simple command has a
 
 Signals ignored upon entry to the shell cannot be trapped, reset or listed. Trapped signals that are not being ignored are reset to their original values in a subshell or subshell environment when one is created. The return status is false if any sigspec is invalid; otherwise trap returns true.
 
+\begin{lstlisting}
 type [-aftpP] name [name ...]
+\end{lstlisting}
 With no options, indicate how each name would be interpreted if used as a command name. If the -t option is used, type prints a string which is one of alias, keyword, function, builtin, or file if name is an alias, shell reserved word, function, builtin, or disk file, respectively. If the name is not found, then nothing is printed, and an exit status of false is returned. If the -p option is used, type either returns the name of the disk file that would be executed if name were specified as a command name, or nothing if ''type -t name'' would not return file. The -P option forces a PATH search for each name, even if ''type -t name'' would not return file. If a command is hashed, -p and -P print the hashed value, not necessarily the file that appears first in PATH. If the -a option is used, type prints all of the places that contain an executable named name. This includes aliases and functions, if and only if the -p option is not also used. The table of hashed commands is not consulted when using -a. The -f option suppresses shell function lookup, as with the command builtin. type returns true if all of the arguments are found, false if any are not found.
+
+\begin{lstlisting}
 ulimit [-HSTabcdefilmnpqrstuvx [limit]]
+\end{lstlisting}
 Provides control over the resources available to the shell and to processes started by it, on systems that allow such control. The -H and -S options specify that the hard or soft limit is set for the given resource. A hard limit cannot be increased by a non-root user once it is set; a soft limit may be increased up to the value of the hard limit. If neither -H nor -S is specified, both the soft and hard limits are set. The value of limit can be a number in the unit specified for the resource or one of the special values hard, soft, or unlimited, which stand for the current hard limit, the current soft limit, and no limit, respectively. If limit is omitted, the current value of the soft limit of the resource is printed, unless the -H option is given. When more than one resource is specified, the limit name and unit are printed before the value. Other options are interpreted as follows:
--a
-All current limits are reported
 
--b
+\begin{longtable}{p{0.3\textwidth}p{0.65\textwidth}}
+-a &
+All current limits are reported \\
 
-The maximum socket buffer size
+-b &
+The maximum socket buffer size \\
 
--c
+-c &
+The maximum size of core files created \\
 
-The maximum size of core files created
+-d &
+The maximum size of a process's data segment \\
 
--d
+-e &
+The maximum scheduling priority ("nice") \\
 
-The maximum size of a process's data segment
+-f &
+The maximum size of files written by the shell and its children \\
 
--e
+-i &
+The maximum number of pending signals \\
 
-The maximum scheduling priority ("nice")
+-l &
+The maximum size that may be locked into memory \\
 
--f
+-m &
+The maximum resident set size (many systems do not honor this limit) \\
 
-The maximum size of files written by the shell and its children
+-n &
+The maximum number of open file descriptors (most systems do not allow this value to be set) \\
 
--i
+-p &
+The pipe size in 512-byte blocks (this may not be set) \\
 
-The maximum number of pending signals
+-q &
+The maximum number of bytes in POSIX message queues \\
 
--l
+-r &
+The maximum real-time scheduling priority \\
 
-The maximum size that may be locked into memory
+-s &
+The maximum stack size \\
 
--m
+-t &
+The maximum amount of cpu time in seconds \\
 
-The maximum resident set size (many systems do not honor this limit)
+-u &
+The maximum number of processes available to a single user \\
 
--n
+-v &
+The maximum amount of virtual memory available to the shell \\
 
-The maximum number of open file descriptors (most systems do not allow this value to be set)
+-x &
+The maximum number of file locks \\
 
--p
-
-The pipe size in 512-byte blocks (this may not be set)
-
--q
-
-The maximum number of bytes in POSIX message queues
-
--r
-
-The maximum real-time scheduling priority
-
--s
-
-The maximum stack size
-
--t
-
-The maximum amount of cpu time in seconds
-
--u
-
-The maximum number of processes available to a single user
-
--v
-
-The maximum amount of virtual memory available to the shell
-
--x
-
-The maximum number of file locks
-
--T
-
-The maximum number of threads
+-T &
+The maximum number of threads \\
+\end{longtable}
 
 If limit is given, it is the new value of the specified resource (the -a option is display only). If no option is given, then -f is assumed. Values are in 1024-byte increments, except for -t, which is in seconds, -p, which is in units of 512-byte blocks, and -T, -b, -n, and -u, which are unscaled values. The return status is 0 unless an invalid option or argument is supplied, or an error occurs while setting a new limit.
+
+
 umask [-p] [-S] [mode]
 The user file-creation mask is set to mode. If mode begins with a digit, it is interpreted as an octal number; otherwise it is interpreted as a symbolic mode mask similar to that accepted by chmod(1). If mode is omitted, the current value of the mask is printed. The -S option causes the mask to be printed in symbolic form; the default output is an octal number. If the -p option is supplied, and mode is omitted, the output is in a form that may be reused as input. The return status is 0 if the mode was successfully changed or if no mode argument was supplied, and false otherwise.
 unalias [-a] [name ...]
@@ -3100,7 +3178,7 @@ unset [-fv] [name ...]
 For each name, remove the corresponding variable or function. If no options are supplied, or the -v option is given, each name refers to a shell variable. Read-only variables may not be unset. If -f is specified, each name refers to a shell function, and the function definition is removed. Each unset variable or function is removed from the environment passed to subsequent commands. If any of COMP_WORDBREAKS, RANDOM, SECONDS, LINENO, HISTCMD, FUNCNAME, GROUPS, or DIRSTACK are unset, they lose their special properties, even if they are subsequently reset. The exit status is true unless a name is readonly.
 wait [n ...]
 Wait for each specified process and return its termination status. Each n may be a process ID or a job specification; if a job spec is given, all processes in that job's pipeline are waited for. If n is not given, all currently active child processes are waited for, and the return status is zero. If n specifies a non-existent process or job, the return status is 127. Otherwise, the return status is the exit status of the last process or job waited for.
-Restricted Shell
+\section{Restricted Shell}\label{sec:restrictedshell}
 If bash is started with the name rbash, or the -r option is supplied at invocation, the shell becomes restricted. A restricted shell is used to set up an environment more controlled than the standard shell. It behaves identically to bash with the exception that the following are disallowed or not performed:
 
 â€¢ changing directories with cd
