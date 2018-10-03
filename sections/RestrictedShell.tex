@@ -1,0 +1,20 @@
+\section{Restricted Shell}\label{sec:restrictedshell}
+    If bash is started with the name rbash, or the -r option is supplied at invocation, the shell becomes restricted. A restricted shell is used to set up an environment more controlled than the standard shell. It behaves identically to bash with the exception that the following are disallowed or not performed:
+    
+    \begin{itemize}
+        \item  changing directories with cd
+        \item  setting or unsetting the values of SHELL, PATH, ENV, or bash\_ENV
+        \item  specifying command names containing /
+        \item  specifying a file name containing a / as an argument to the . builtin command
+        \item  Specifying a filename containing a slash as an argument to the -p option to the hash builtin command
+        \item  importing function definitions from the shell environment at startup
+        \item  parsing the value of SHELLOPTS from the shell environment at startup
+        \item  redirecting output using the >, >|, <>, \&,\&>, and >> redirection operators
+        \item  using the exec builtin command to replace the shell with another command
+        \item  adding or deleting builtin commands with the -f and -d options to the enable builtin command
+        \item  Using the enable builtin command to enable disabled shell builtins
+        \item  specifying the -p option to the command builtin command
+        \item  turning off restricted mode with set +r or set +o restricted.
+    \end{itemize}
+    These restrictions are enforced after any startup files are read.
+    When a command that is found to be a shell script is executed \hyperref[sec:commandexecution]{see COMMAND EXECUTION above), rbash turns off any restrictions in the shell spawned to execute the script.

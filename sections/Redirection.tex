@@ -1,0 +1,126 @@
+\section{Redirection}\label{sec:redirection}
+Before a command is executed, its input and output may be redirected using a special notation interpreted by the shell. Redirection may also be used to open and close files for the current shell execution environment. The following redirection operators may precede or appear anywhere within a simple command or may follow a command. Redirections are processed in the order they appear, from left to right.
+
+Each redirection that may be preceded by a file descriptor number may instead be preceded by a word of the form {varname}. In this case, for each redirection operator except \&- and \&-, the shell will allocate a file descriptor greater than 10 and assign it to varname. If \&- or \&- is preceded by {varname}, the value of varname defines the file descriptor to close.
+
+In the following descriptions, if the file descriptor number is omitted, and the first character of the redirection operator is <, the redirection refers to the standard input (file descriptor 0). If the first character of the redirection operator is >, the redirection refers to the standard output (file descriptor 1).
+
+The word following the redirection operator in the following descriptions, unless otherwise noted, is subjected to brace expansion, tilde expansion, parameter expansion, command substitution, arithmetic expansion, quote removal, pathname expansion, and word splitting. If it expands to more than one word, bash reports an error.
+
+Note that the order of redirections is significant. For example, the command
+
+ls > dirlist 2\&1
+directs both standard output and standard error to the file dirlist, while the command
+ls 2\&1 > dirlist
+directs only the standard output to file dirlist, because the standard error was duplicated from the standard output before the standard output was redirected to dirlist.
+Bash handles several filenames specially when they are used in redirections, as described in the following table:
+
+/dev/fd/fd
+If fd is a valid integer, file descriptor fd is duplicated.
+
+/dev/stdin
+File descriptor 0 is duplicated.
+
+/dev/stdout
+File descriptor 1 is duplicated.
+
+/dev/stderr
+File descriptor 2 is duplicated.
+
+/dev/tcp/host/port
+If host is a valid hostname or Internet address, and port is an integer port number or service name, bash attempts to open a TCP connection to the corresponding socket.
+
+/dev/udp/host/port
+If host is a valid hostname or Internet address, and port is an integer port number or service name, bash attempts to open a UDP connection to the corresponding socket.
+
+A failure to open or create a file causes the redirection to fail.
+Redirections using file descriptors greater than 9 should be used with care, as they may conflict with file descriptors the shell uses internally.
+
+Redirecting Input
+
+Redirection of input causes the file whose name results from the expansion of word to be opened for reading on file descriptor n, or the standard input (file descriptor 0) if n is not specified.
+The general format for redirecting input is:
+
+[n]<word
+Redirecting Output
+
+Redirection of output causes the file whose name results from the expansion of word to be opened for writing on file descriptor n, or the standard output (file descriptor 1) if n is not specified. If the file does not exist it is created; if it does exist it is truncated to zero size.
+The general format for redirecting output is:
+
+[n]>word
+If the redirection operator is >, and the noclobber option to the set builtin has been enabled, the redirection will fail if the file whose name results from the expansion of word exists and is a regular file. If the redirection operator is >|, or the redirection operator is > and the noclobber option to the set builtin command is not enabled, the redirection is attempted even if the file named by word exists.
+Appending Redirected Output
+
+Redirection of output in this fashion causes the file whose name results from the expansion of word to be opened for appending on file descriptor n, or the standard output (file descriptor 1) if n is not specified. If the file does not exist it is created.
+The general format for appending output is:
+
+[n]>>word
+Redirecting Standard Output and Standard Error
+
+This construct allows both the standard output (file descriptor 1) and the standard error output (file descriptor 2) to be redirected to the file whose name is the expansion of word.
+There are two formats for redirecting standard output and standard error:
+
+\&>word
+and
+\&word
+Of the two forms, the first is preferred. This is semantically equivalent to
+>word 2\&1
+Appending Standard Output and Standard Error
+
+This construct allows both the standard output (file descriptor 1) and the standard error output (file descriptor 2) to be appended to the file whose name is the expansion of word.
+The format for appending standard output and standard error is:
+
+\&>>word
+This is semantically equivalent to
+>>word 2\&1
+Here Documents
+
+This type of redirection instructs the shell to read input from the current source until a line containing only delimiter (with no trailing blanks) is seen. All of the lines read up to that point are then used as the standard input for a command.
+The format of here-documents is:
+
+<<[-]word
+        here-document
+delimiter
+No parameter expansion, command substitution, arithmetic expansion, or pathname expansion is performed on word. If any characters in word are quoted, the delimiter is the result of quote removal on word, and the lines in the here-document are not expanded. If word is unquoted, all lines of the here-document are subjected to parameter expansion, command substitution, and arithmetic expansion. In the latter case, the character sequence \textbackslash<newline> is ignored, and \textbackslash must be used to quote the characters \textbackslash, \$, and `.
+If the redirection operator is <<-, then all leading tab characters are stripped from input lines and the line containing delimiter. This allows here-documents within shell scripts to be indented in a natural fashion.
+
+Here Strings
+
+A variant of here documents, the format is:
+<<<word
+The word is expanded and supplied to the command on its standard input.
+Duplicating File Descriptors
+
+The redirection operator
+[n]\&word
+is used to duplicate input file descriptors. If word expands to one or more digits, the file descriptor denoted by n is made to be a copy of that file descriptor. If the digits in word do not specify a file descriptor open for input, a redirection error occurs. If word evaluates to -, file descriptor n is closed. If n is not specified, the standard input (file descriptor 0) is used.
+The operator
+
+[n]\&word
+is used similarly to duplicate output file descriptors. If n is not specified, the standard output (file descriptor 1) is used. If the digits in word do not specify a file descriptor open for output, a redirection error occurs. As a special case, if n is omitted, and word does not expand to one or more digits, the standard output and standard error are redirected as described previously.
+Moving File Descriptors
+
+The redirection operator
+[n]\&digit-
+moves the file descriptor digit to file descriptor n, or the standard input (file descriptor 0) if n is not specified. digit is closed after being duplicated to n.
+Similarly, the redirection operator
+
+[n]\&digit-
+moves the file descriptor digit to file descriptor n, or the standard output (file descriptor 1) if n is not specified.
+Opening File Descriptors for Reading and Writing
+
+The redirection operator
+[n]<>word
+causes the file whose name is the expansion of word to be opened for both reading and writing on file descriptor n, or on file descriptor 0 if n is not specified. If the file does not exist, it is created.
+Aliases
+Aliases allow a string to be substituted for a word when it is used as the first word of a simple command. The shell maintains a list of aliases that may be set and unset with the alias and unalias builtin commands \hyperref[sec:shellbuiltincommands]{see SHELL BUILTIN COMMANDS below)}. The first word of each simple command, if unquoted, is checked to see if it has an alias. If so, that word is replaced by the text of the alias. The characters /, \$, `, and = and any of the shell metacharacters or quoting characters listed above may not appear in an alias name. The replacement text may contain any valid shell input, including shell metacharacters. The first word of the replacement text is tested for aliases, but a word that is identical to an alias being expanded is not expanded a second time. This means that one may alias ls to ls -F, for instance, and bash does not try to recursively expand the replacement text. If the last character of the alias value is a blank, then the next command word following the alias is also checked for alias expansion.
+
+Aliases are created and listed with the alias command, and removed with the unalias command.
+
+There is no mechanism for using arguments in the replacement text. If arguments are needed, a shell function should be used \hyperref[sec:functions]{see FUNCTIONS below)}.
+
+Aliases are not expanded when the shell is not interactive, unless the expand\_aliases shell option is set using shopt (see the description of shopt under SHELL BUILTIN COMMANDS below)}.
+
+The rules concerning the definition and use of aliases are somewhat confusing. Bash always reads at least one complete line of input before executing any of the commands on that line. Aliases are expanded when a command is read, not when it is executed. Therefore, an alias definition appearing on the same line as another command does not take effect until the next line of input is read. The commands following the alias definition on that line are not affected by the new alias. This behavior is also an issue when functions are executed. Aliases are expanded when a function definition is read, not when the function is executed, because a function definition is itself a compound command. As a consequence, aliases defined in a function are not available until after that function is executed. To be safe, always put alias definitions on a separate line, and do not use alias in compound commands.
+
+For almost every purpose, aliases are superseded by shell functions.

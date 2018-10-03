@@ -1,0 +1,16 @@
+\section{Bugs}\label{sec:bugs}
+    \begin{itemize}
+        \item  It's too big and too slow.
+        
+        \item  There are some subtle differences between bash and traditional versions of sh, mostly because of the POSIX specification.
+    
+        \item  Aliases are confusing in some uses.
+    
+        \item  Shell builtin commands and functions are not stoppable/restartable.
+    
+        \item  Compound commands and command sequences of the form 'a ; b ; c' are not handled gracefully when process suspension is attempted. When a process is stopped, the shell immediately executes the next command in the sequence. It suffices to place the sequence of commands between parentheses to force it into a subshell, which may be stopped as a unit.
+    
+        \item  Array variables may not (yet) be exported.
+    
+        \item  There may be only one active coprocess at a time.
+    \end{itemize}

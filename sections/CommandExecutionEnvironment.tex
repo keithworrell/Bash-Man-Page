@@ -1,0 +1,30 @@
+\section{Command Execution Environment}\label{sec:commandexecutionenvironment}
+The shell has an execution environment, which consists of the following:
+
+\begin{itemize}
+    \item  open files inherited by the shell at invocation, as modified by redirections supplied to the exec builtin
+    \item  the current working directory as set by cd, pushd, or popd, or inherited by the shell at invocation
+    \item  the file creation mode mask as set by umask or inherited from the shell's parent
+    \item  current traps set by trap
+    \item  shell parameters that are set by variable assignment or with set or inherited from the shell's parent in the environment
+    \item  shell functions defined during execution or inherited from the shell's parent in the environment
+    \item  options enabled at invocation (either by default or with command-line arguments) or by set
+    \item  options enabled by shopt
+    \item  shell aliases defined with alias
+    \item  various process IDs, including those of background jobs, the value of \$\$, and the value of PPID
+\end{itemize}
+
+When a simple command other than a builtin or shell function is to be executed, it is invoked in a separate execution environment that consists of the following. Unless otherwise noted, the values are inherited from the shell.
+\begin{itemize}
+    \item  the shell's open files, plus any modifications and additions specified by redirections to the command
+    \item  the current working directory
+    \item  the file creation mode mask
+    \item  shell variables and functions marked for export, along with variables exported for the command, passed in the environment
+    \item  traps caught by the shell are reset to the values inherited from the shell's parent, and traps ignored by the shell are ignored
+\end{itemize}
+A command invoked in this separate environment cannot affect the shell's execution environment.
+Command substitution, commands grouped with parentheses, and asynchronous commands are invoked in a subshell environment that is a duplicate of the shell environment, except that traps caught by the shell are reset to the values that the shell inherited from its parent at invocation. Builtin commands that are invoked as part of a pipeline are also executed in a subshell environment. Changes made to the subshell environment cannot affect the shell's execution environment.
+
+Subshells spawned to execute command substitutions inherit the value of the -e option from the parent shell. When not in posix mode, Bash clears the -e option in such subshells.
+
+If a command is followed by a\& and job control is not active, the default standard input for the command is the empty file /dev/null. Otherwise, the invoked command inherits the file descriptors of the calling shell as modified by redirections.
