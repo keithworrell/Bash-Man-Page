@@ -1,77 +1,75 @@
 \section{Options}
 \label{sec:options}
-In addition to the single-character shell options documented in the description of the set builtin command, bash interprets the following options when it is invoked:
+In addition to the single-character shell options documented in the description of the \gls{set} builtin command, \gls{bash} interprets the following options when it is invoked:
 
 \renewcommand{\arraystretch}{2}
 
-\input{newCommands/formattingCommands.tex}
-
 \noindent
 \begin{longtable}\defaultlongtable
-\ttext{-c }{string} & 
-If the -c option is present, then commands are read from string. If there are arguments after the string, they are assigned to the positional parameters, starting with \$0. \\
+\textbf{-c }\textit{string} & 
+If the \textbf{-c}  option is present, then commands are read from string. If there are arguments after the string, they are assigned to the positional parameters, starting with \textbf{\$0}. \\
 
-\ttext{-i}{} & 
-If the -i option is present, the shell is interactive. \\
+\textbf{-i} & 
+If the \textbf{-i}  option is present, the shell is interactive. \\
 
-\ttext{-l}{} & 
-Make bash act as if it had been invoked as a login shell
-\hyperref[sec:invocation]{(see INVOCATION below)}. \\
+\textbf{-l} & 
+Make \gls{bash} act as if it had been invoked as a login shell
+\mbox{\hyperref[sec:invocation]{(see \textbf{INVOCATION} below)}}. \\
 
-\ttext{-r}{} & 
-If the -r option is present, the shell becomes restricted \hyperref[sec:restrictedshell]{(see RESTRICTED SHELL below)}. \\
+\textbf{-r} & 
+If the \textbf{-r}  option is present, the shell becomes restricted \mbox{\hyperref[sec:restrictedshell]{(see \textbf{RESTRICTED SHELL} below)}}. \\
 
-\ttext{-s}{} & 
-If the -s option is present, or if no arguments remain after option processing, then commands are read from the standard input. This option allows the positional parameters to be set when invoking an interactive shell. \\
+\textbf{-s} & 
+If the \textbf{-s}  option is present, or if no arguments remain after option processing, then commands are read from the standard input. This option allows the positional parameters to be set when invoking an interactive shell. \\
 
-\ttext{-D}{} & 
+\textbf{-D} & 
 A list of all double-quoted strings preceded by \$ is printed on the standard output. These are the strings that are subject to language translation when the current locale is not C or POSIX. This implies the -n option; no commands will be executed. \\
 
-\ttext{[-+]O [shopt\_option]}{} & 
-shopt\_option is one of the shell options accepted by the shopt builtin \hyperref[sec:shellbuiltincommands]{(see SHELL BUILTIN COMMANDS below)}. If shopt\_option is present, -O sets the value of that option; +O unsets it. If shopt\_option is not supplied, the names and values of the shell options accepted by shopt are printed on the standard output. If the invocation option is +O, the output is displayed in a format that may be reused as input. \\
+\textbf{[-+]O [shopt\_option]} & 
+\textit{shopt\_option} is one of the shell options accepted by the shopt builtin \hyperref[sec:shellbuiltincommands]{(see \textbf{SHELL BUILTIN COMMANDS} below)}. If \textit{shopt\_option} is present, \textbf{-O} sets the value of that option; \textbf{+O} unsets it. If shopt\_option is not supplied, the names and values of the shell options accepted by shopt are printed on the standard output. If the invocation option is \textbf{+O}, the output is displayed in a format that may be reused as input. \\
 
-\ttext{--}{} & 
-A -- signals the end of options and disables further option processing. Any arguments after the -- are treated as filenames and arguments. An argument of - is equivalent to --.\newline Bash also interprets a number of multi-character options. These options must appear on the command line before the single-character options to be recognized.\\
+\textbf{--} & 
+A \textbf{--} signals the end of options and disables further option processing. Any arguments after the \textbf{--} are treated as filenames and arguments. An argument of \textbf{-} is equivalent to \textbf{--}.\newline \Gls{bash} also interprets a number of multi-character options. These options must appear on the command line before the single-character options to be recognized.\\
 
-\ttext{--debugger}{} & 
-Arrange for the debugger profile to be executed before the shell starts. Turns on extended debugging mode \hyperref[sec:options]{(see the description of the extdebug option to the shopt builtin below)} and shell function tracing \hyperref[sec:shellbuiltincommands]{(see the description of the -o functrace option to the set builtin below)}.\\
+\textbf{--debugger} & 
+Arrange for the debugger profile to be executed before the shell starts. Turns on extended debugging mode \hyperref[sec:options]{(see the description of the \textbf{extdebug} option to the shopt builtin below)} and shell function tracing \hyperref[sec:shellbuiltincommands]{(see the description of the \textbf{-o} functrace option to the set builtin below)}.\\
 
-\ttext{--dump-po-strings}{} &
-Equivalent to -D, but the output is in the GNU gettext po (portable object) file format. \\
+\textbf{--dump-po-strings} &
+Equivalent to \textbf{-D}, but the output is in the GNU \textit{gettext} \textbf{po} (portable object) file format. \\
 
-\ttext{--dump-strings}{} &
-Equivalent to -D. \\
+\textbf{--dump-strings} &
+Equivalent to \textbf{-D}. \\
 
-\ttext{--help}{} &
+\textbf{--help} &
 Display a usage message on standard output and exit successfully.\\
 
-\ttext{--init-file }{file} \newline \ttext{--rcfile }{file}  &
-Execute commands from file instead of the standard personal initialization file \url{~/.bashrc} if the shell is interactive \hyperref[sec:invocation]{(see INVOCATION below)}.\\
+\textbf{--init-file }\textit{file} \newline \textbf{--rcfile }\textit{file}  &
+Execute commands from file instead of the standard personal initialization file \url{~/.bashrc} if the shell is interactive \hyperref[sec:invocation]{(see \textbf{INVOCATION} below)}.\\
 
-\ttext{--login}{} &
+\textbf{--login} &
 Equivalent to -l.\\
 
-\ttext{--noediting}{} &
+\textbf{--noediting} &
 Do not use the GNU readline library to read command lines when the shell is interactive. \\
 
-\ttext{--noprofile}{} &
-Do not read either the system-wide startup file /etc/profile or any of the personal initialization files \url{~/.bash\_profile}, \url{~/.bash\_login}, or\url{ ~/.profile}. By default, bash reads these files when it is invoked as a login shell \hyperref[sec:invocation]{(see INVOCATION below)}. \\
+\textbf{--noprofile} &
+Do not read either the system-wide startup file /etc/profile or any of the personal initialization files \url{~/.bash\_profile}, \url{~/.bash\_login}, or\url{ ~/.profile}. By default, \gls{bash} reads these files when it is invoked as a login shell \hyperref[sec:invocation]{(see \textbf{INVOCATION} below)}. \\
 
-\ttext{--norc}{} &
-Do not read and execute the personal initialization file ~/.bashrc if the shell is interactive. This option is on by default if the shell is invoked as sh. \\
+\textbf{--norc} &
+Do not read and execute the personal initialization file \url{~/.bashrc} if the shell is interactive. This option is on by default if the shell is invoked as \gls{sh}. \\
 
-\ttext{--posix}{} &
-Change the behavior of bash where the default operation differs from the POSIX standard to match the standard (posix mode). \\
+\textbf{--posix} &
+Change the behavior of \gls{bash} where the default operation differs from the POSIX standard to match the standard (posix mode). \\
 
-\ttext{--restricted}{} &
-The shell becomes restricted \hyperref[sec:restrictedshell]{see RESTRICTED SHELL below)}.\\
+\textbf{--restricted} &
+The shell becomes restricted \hyperref[sec:restrictedshell]{(see \textbf{RESTRICTED SHELL} below)}.\\
 
-\ttext{--rpm-requires}{} &
+\textbf{--rpm-requires} &
 Produce the list of files that are required for the shell script to run. This implies '-n' and is subject to the same limitations as compile time error checking checking; Backticks, [] tests, and evals are not parsed so some dependencies may be missed. \\
 
-\ttext{--verbose}{} &
-Equivalent to -v. \\
+\textbf{--verbose} &
+Equivalent to \textbf{-v}. \\
 
-\ttext{--version}{} &
-Show version information for this instance of bash on the standard output and exit successfully. \\
+\textbf{--version} &
+Show version information for this instance of \gls{bash} on the standard output and exit successfully. \\
 \end{longtable}

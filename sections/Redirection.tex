@@ -119,7 +119,7 @@ Aliases are created and listed with the alias command, and removed with the unal
 
 There is no mechanism for using arguments in the replacement text. If arguments are needed, a shell function should be used \hyperref[sec:functions]{see FUNCTIONS below)}.
 
-Aliases are not expanded when the shell is not interactive, unless the expand\_aliases shell option is set using shopt (see the description of shopt under SHELL BUILTIN COMMANDS below)}.
+Aliases are not expanded when the shell is not interactive, unless the expand\_aliases shell option is set using shopt \hyperref[sec:shellbuiltincommands]{(see the description of shopt under SHELL BUILTIN COMMANDS below)}.
 
 The rules concerning the definition and use of aliases are somewhat confusing. Bash always reads at least one complete line of input before executing any of the commands on that line. Aliases are expanded when a command is read, not when it is executed. Therefore, an alias definition appearing on the same line as another command does not take effect until the next line of input is read. The commands following the alias definition on that line are not affected by the new alias. This behavior is also an issue when functions are executed. Aliases are expanded when a function definition is read, not when the function is executed, because a function definition is itself a compound command. As a consequence, aliases defined in a function are not available until after that function is executed. To be safe, always put alias definitions on a separate line, and do not use alias in compound commands.
 

@@ -76,25 +76,25 @@ bash\_VERSION &
 Expands to a string describing the version of this instance of bash. \\
 
 COMP\_CWORD &
-An index into \${COMP\_WORDS} of the word containing the current cursor position. This variable is available only in shell functions invoked by the programmable completion facilities \hyperref[sec:programablecompletion]{(see Programmable Completion below)}. \\
+An index into \${COMP\_WORDS} of the word containing the current cursor position. This variable is available only in shell functions invoked by the programmable completion facilities \hyperref[sec:programmablecompletion]{(see Programmable Completion below)}. \\
 
 COMP\_KEY &
 The key (or final key of a key sequence) used to invoke the current completion function. \\
 
 COMP\_LINE &
-The current command line. This variable is available only in shell functions and external commands invoked by the programmable completion facilities \hyperref[sec:programablecompletion]{(see Programmable Completion below)}. \\
+The current command line. This variable is available only in shell functions and external commands invoked by the programmable completion facilities \hyperref[sec:programmablecompletion]{(see Programmable Completion below)}. \\
 
 COMP\_POINT &
-The index of the current cursor position relative to the beginning of the current command. If the current cursor position is at the end of the current command, the value of this variable is equal to \${\#COMP\_LINE}. This variable is available only in shell functions and external commands invoked by the programmable completion facilities \hyperref[sec:programablecompletion]{(see Programmable Completion below)}. \\
+The index of the current cursor position relative to the beginning of the current command. If the current cursor position is at the end of the current command, the value of this variable is equal to \${\#COMP\_LINE}. This variable is available only in shell functions and external commands invoked by the programmable completion facilities \hyperref[sec:programmablecompletion]{(see Programmable Completion below)}. \\
 
 COMP\_TYPE &
-Set to an integer value corresponding to the type of completion attempted that caused a completion function to be called: TAB, for normal completion, ?, for listing completions after successive tabs, !, for listing alternatives on partial word completion, @, to list completions if the word is not unmodified, or \%, for menu completion. This variable is available only in shell functions and external commands invoked by the programmable completion facilities \hyperref[sec:programablecompletion]{(see Programmable Completion below)}. \\
+Set to an integer value corresponding to the type of completion attempted that caused a completion function to be called: TAB, for normal completion, ?, for listing completions after successive tabs, !, for listing alternatives on partial word completion, @, to list completions if the word is not unmodified, or \%, for menu completion. This variable is available only in shell functions and external commands invoked by the programmable completion facilities \hyperref[sec:programmablecompletion]{(see Programmable Completion below)}. \\
 
 COMP\_WORDBREAKS &
 The set of characters that the readline library treats as word separators when performing word completion. If COMP\_WORDBREAKS is unset, it loses its special properties, even if it is subsequently reset. \\
 
 COMP\_WORDS &
-An array variable \hyperref[sec:arrays]{(see Arrays below)} consisting of the individual words in the current command line. The line is split into words as readline would split it, using COMP\_WORDBREAKS as described above. This variable is available only in shell functions invoked by the programmable completion facilities \hyperref[sec:programablecompletion]{(see Programmable Completion below)}. \\
+An array variable \hyperref[sec:arrays]{(see Arrays below)} consisting of the individual words in the current command line. The line is split into words as readline would split it, using COMP\_WORDBREAKS as described above. This variable is available only in shell functions invoked by the programmable completion facilities \hyperref[sec:programmablecompletion]{(see Programmable Completion below)}. \\
 DIRSTACK &
 An array variable \hyperref[sec:arrays]{(see Arrays below)} containing the current contents of the directory stack. Directories appear in the stack in the order they are displayed by the dirs builtin. Assigning to members of this array variable may be used to modify directories already in the stack, but the pushd and popd builtins must be used to add and remove directories. Assignment to this variable will not change the current directory. If DIRSTACK is unset, it loses its special properties, even if it is subsequently reset. \\
 
@@ -179,7 +179,7 @@ COLUMNS &
 Used by the select builtin command to determine the terminal width when printing selection lists. Automatically set upon receipt of a SIGWINCH. \\
 
 COMPREPLY &
-An array variable from which bash reads the possible completions generated by a shell function invoked by the programmable completion facility \hyperref[sec:programablecompletion]{(see Programmable Completion below)}. \\
+An array variable from which bash reads the possible completions generated by a shell function invoked by the programmable completion facility \hyperref[sec:programmablecompletion]{(see Programmable Completion below)}. \\
 
 EMACS &
 If bash finds this variable in the environment when the shell starts with value "t", it assumes that the shell is running in an emacs shell buffer and disables line editing. \\
@@ -257,9 +257,10 @@ Specifies how often (in seconds) bash checks for mail. The default is 60 seconds
 
 MAILPATH &
 A colon-separated list of file names to be checked for mail. The message to be printed when mail arrives in a particular file may be specified by separating the file name from the message with a '?'. When used in the text of the message, \$\_ expands to the name of the current mailfile. Example:
-\begin{lstlisting}
-MAILPATH='/var/mail/bfox?"You have mail":~/shell-mail?"\$\_ has mail!"'
+\begin{lstlisting}[language=bash]
+    MAILPATH='/var/mail/bfox?"You have mail":~/shell-mail?"$_ has mail!"'
 \end{lstlisting}
+
 Bash supplies a default value for this variable, but the location of the user mail files that it uses is system dependent (e.g., \url{/var/mail/\$USER}). \\
 
 OPTERR &
@@ -318,7 +319,7 @@ The optional l specifies a longer format, including minutes, of the form MMmSS.F
 
 If this variable is not set, bash acts as if it had the value 
 \begin{lstlisting}
-    \$'\nreal\t\%3lR\nuser\t\%3lU\nsys\%3lS'
+    $'\nreal\t%3lR\nuser\t%3lU\nsys%3lS'
 \end{lstlisting}
         
 If the value is null, no timing information is displayed. A trailing newline is added when the format string is displayed. \\
@@ -331,7 +332,7 @@ TMPDIR &
 If set, Bash uses its value as the name of a directory in which Bash creates temporary files for the shell's use. \\
 
 auto\_resume &
-This variable controls how the shell interacts with the user and job control. If this variable is set, single word simple commands without redirections are treated as candidates for resumption of an existing stopped job. There is no ambiguity allowed; if there is more than one job beginning with the string typed, the job most recently accessed is selected. The name of a stopped job, in this context, is the command line used to start it. If set to the value exact, the string supplied must match the name of a stopped job exactly; if set to substring, the string supplied needs to match a substring of the name of a stopped job. The substring value provides functionality analogous to the \%? job identifier \hyperref[sec:joncontrol]{see JOB CONTROL below)}. If set to any other value, the supplied string must be a prefix of a stopped job's name; this provides functionality analogous to the \%string job identifier. \\
+This variable controls how the shell interacts with the user and job control. If this variable is set, single word simple commands without redirections are treated as candidates for resumption of an existing stopped job. There is no ambiguity allowed; if there is more than one job beginning with the string typed, the job most recently accessed is selected. The name of a stopped job, in this context, is the command line used to start it. If set to the value exact, the string supplied must match the name of a stopped job exactly; if set to substring, the string supplied needs to match a substring of the name of a stopped job. The substring value provides functionality analogous to the \%? job identifier \hyperref[sec:jobcontrol]{see JOB CONTROL below)}. If set to any other value, the supplied string must be a prefix of a stopped job's name; this provides functionality analogous to the \%string job identifier. \\
 
 histchars &
 The two or three characters which control history expansion and tokenization \hyperref[sec:historyexpansion]{see HISTORY EXPANSION below)}. The first character is the history expansion character, the character which signals the start of a history expansion, normally '!'. The second character is the quick substitution character, which is used as shorthand for re-running the previous command entered, substituting one string for another in the command. The default is '\^{}'. The optional third character is the character which indicates that the remainder of the line is a comment when found as the first character of a word, normally '\#'. The history comment character causes history substitution to be skipped for the remaining words on the line. It does not necessarily cause the shell parser to treat the rest of the line as a comment. \\

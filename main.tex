@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[11pt]{scrartcl}
 
 % All \usepackage commands are contained here:
 \input{preamble/packages.tex}
@@ -9,6 +9,7 @@
 \setlength{\parskip}{0.5em}
 
 \title{Bash(1) - Linux man page}
+\subtitle{\LaTeX Edition}
 \author{keith.worrell}
 \date{September 2018}
 
@@ -16,6 +17,9 @@
 
 \maketitle
 \tableofcontents 
+
+\input{newCommands/formattingCommands.tex}
+\input{newCommands/keywordHighlights.tex}
 
 \input{sections/Introduction.tex}
 
@@ -84,5 +88,12 @@
 \input{sections/Bugs.tex}
 
 \input{sections/ReferencedBy.tex}
+
+\noindent\hrulefill
+\printglossary
+
+\begin{appendices}
+\input{help.tex}
+\end{appendices}
 
 \end{document}

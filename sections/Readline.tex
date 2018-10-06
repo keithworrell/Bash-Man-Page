@@ -167,7 +167,8 @@ skip-completed-text (Off)
 If set to On, this alters the default completion behavior when inserting a single match into the line. It's only active when performing completion in the middle of a word. If enabled, readline does not insert characters from the completion that match characters after point in the word being completed, so portions of the word following the cursor are not duplicated.
 visible-stats (Off)
 If set to On, a character denoting a file's type as reported by stat(2) is appended to the filename when listing possible completions.
-Readline Conditional Constructs
+
+\subsection{Readline Conditional Constructs}\label{sec:readlineconditionalconstructs}
 
 Readline implements a facility similar in spirit to the conditional compilation features of the C preprocessor which allows key bindings and variable settings to be performed as the result of tests. There are four parser directives used.
 \$if
@@ -201,7 +202,8 @@ Commands in this branch of the \$if directive are executed if the test fails.
 \$include
 This directive takes a single filename as an argument and reads commands and bindings from that file. For example, the following directive would read /etc/inputrc:
 \$include  /etc/inputrc
-Searching
+
+\subsection{Searching}\label{sec:searching}
 
 Readline provides commands for searching through the command history \hyperref[sec:history]{see HISTORY below)} for lines containing a specified string. There are two search modes: incremental and non-incremental.
 Incremental searches begin before the user has finished typing the search string. As each character of the search string is typed, readline displays the next entry from the history matching the string typed so far. An incremental search requires only as many characters as needed to find the desired history entry. The characters present in the value of the isearch-terminators variable are used to terminate an incremental search. If that variable has not been assigned a value the Escape and Control-J characters will terminate an incremental search. Control-G will abort an incremental search and restore the original line. When the search is terminated, the history entry containing the search string becomes the current line.
@@ -212,10 +214,10 @@ Readline remembers the last incremental search string. If two Control-Rs are typ
 
 Non-incremental searches read the entire search string before starting to search for matching history lines. The search string may be typed by the user or be part of the contents of the current line.
 
-Readline Command Names
+\subsection{Readline Command Names}\label{sec:readlinecommandnames}
 
 The following is a list of the names of the commands and the default key sequences to which they are bound. Command names without an accompanying key sequence are unbound by default. In the following descriptions, point refers to the current cursor position, and mark refers to a cursor position saved by the set-mark command. The text between the point and mark is referred to as the region.
-Commands for Moving
+\subsection{Commands for Moving}\label{sec:commandsformoving}
 
 beginning-of-line (C-a)
 Move to the start of the current line.
@@ -237,7 +239,7 @@ clear-screen (C-l)
 Clear the screen leaving the current line at the top of the screen. With an argument, refresh the current line without clearing the screen.
 redraw-current-line
 Refresh the current line.
-Commands for Manipulating the History
+\subsection{Commands for Manipulating the History}\label{sec:commandsformanipulatingthehistory}
 
 accept-line (Newline, Return)
 Accept the line regardless of where the cursor is. If this line is non-empty, add it to the history list according to the state of the HISTCONTROL variable. If the line is a modified history line, then restore the history line to its original state.
@@ -281,7 +283,7 @@ operate-and-get-next (C-o)
 Accept the current line for execution and fetch the next line relative to the current line from the history for editing. Any argument is ignored.
 edit-and-execute-command (C-xC-e)
 Invoke an editor on the current command line, and execute the result as shell commands. Bash attempts to invoke \$VISUAL, \$EDITOR, and emacs as the editor, in that order.
-Commands for Changing Text
+\subsection{Commands for Changing Text}\label{sec:commandsforchangingtext}
 
 delete-char (C-d)
 Delete the character at point. If point is at the beginning of the line, there are no characters in the line, and the last character typed was not bound to delete-char, then return EOF.
@@ -307,7 +309,7 @@ capitalize-word (M-c)
 Capitalize the current (or following) word. With a negative argument, capitalize the previous word, but do not move point.
 overwrite-mode
 Toggle overwrite mode. With an explicit positive numeric argument, switches to overwrite mode. With an explicit non-positive numeric argument, switches to insert mode. This command affects only emacs mode; vi mode does overwrite differently. Each call to readline() starts in insert mode. In overwrite mode, characters bound to self-insert replace the text at point rather than pushing the text to the right. Characters bound to backward-delete-char replace the character before point with a space. By default, this command is unbound.
-Killing and Yanking
+\subsection{Killing and Yanking}\label{sec:killingandyanking}
 
 kill-line (C-k)
 Kill the text from point to the end of the line.
@@ -343,13 +345,14 @@ yank (C-y)
 Yank the top of the kill ring into the buffer at point.
 yank-pop (M-y)
 Rotate the kill ring, and yank the new top. Only works following yank or yank-pop.
-Numeric Arguments
+\subsection{Numeric Arguments}\label{sec:numericarguments}
 
 digit-argument (M-0, M-1, ..., M--)
 Add this digit to the argument already accumulating, or start a new argument. M-- starts a negative argument.
 universal-argument
 This is another way to specify an argument. If this command is followed by one or more digits, optionally with a leading minus sign, those digits define the argument. If the command is followed by digits, executing universal-argument again ends the numeric argument, but is otherwise ignored. As a special case, if this command is immediately followed by a character that is neither a digit or minus sign, the argument count for the next command is multiplied by four. The argument count is initially one, so executing this function the first time makes the argument count four, a second time makes the argument count sixteen, and so on.
-Completing
+
+\subsection{Completing}\label{sec:completing}
 
 complete (TAB)
 Attempt to perform completion on the text before point. Bash attempts completion treating the text as a variable (if the text begins with \$), username (if the text begins with ~), hostname (if the text begins with @), or command (including aliases and functions) in turn. If none of these produces a match, filename completion is attempted.
@@ -387,9 +390,10 @@ dynamic-complete-history (M-TAB)
 Attempt completion on the text before point, comparing the text against lines from the history list for possible completion matches.
 dabbrev-expand
 Attempt menu completion on the text before point, comparing the text against lines from the history list for possible completion matches.
-complete-into-braces (M-{)
+complete-into-braces (M-\{)
 Perform filename completion and insert the list of possible completions enclosed within braces so the list is available to the shell (see Brace Expansion above).
-Keyboard Macros
+
+\subsection{Keyboard Macros}\label{sec:keyboardmacros}
 
 start-kbd-macro (C-x ()
 Begin saving the characters typed into the current keyboard macro.
@@ -397,49 +401,70 @@ end-kbd-macro (C-x ))
 Stop saving the characters typed into the current keyboard macro and store the definition.
 call-last-kbd-macro (C-x e)
 Re-execute the last keyboard macro defined, by making the characters in the macro appear as if typed at the keyboard.
-Miscellaneous
 
-re-read-init-file (C-x C-r)
-Read in the contents of the inputrc file, and incorporate any bindings or variable assignments found there.
-abort (C-g)
-Abort the current editing command and ring the terminal's bell (subject to the setting of bell-style).
-do-uppercase-version (M-a, M-b, M-x, ...)
-If the metafied character x is lowercase, run the command that is bound to the corresponding uppercase character.
-prefix-meta (ESC)
-Metafy the next character typed. ESC f is equivalent to Meta-f.
-undo (C-\_, C-x C-u)
-Incremental undo, separately remembered for each line.
-revert-line (M-r)
-Undo all changes made to this line. This is like executing the undo command enough times to return the line to its initial state.
-tilde-expand (M\&)
-Perform tilde expansion on the current word.
-set-mark (C-@, M-<space>)
-Set the mark to the point. If a numeric argument is supplied, the mark is set to that position.
-exchange-point-and-mark (C-x C-x)
-Swap the point with the mark. The current cursor position is set to the saved position, and the old cursor position is saved as the mark.
-character-search (C-])
-A character is read and point is moved to the next occurrence of that character. A negative count searches for previous occurrences.
-character-search-backward (M-C-])
-A character is read and point is moved to the previous occurrence of that character. A negative count searches for subsequent occurrences.
-skip-csi-sequence ()
-Read enough characters to consume a multi-key sequence such as those defined for keys like Home and End. Such sequences begin with a Control Sequence Indicator (CSI), usually ESC-[. If this sequence is bound to "\[", keys producing such sequences will have no effect unless explicitly bound to a readline command, instead of inserting stray characters into the editing buffer. This is unbound by default, but usually bound to ESC-[.
-insert-comment (M-\#)
-Without a numeric argument, the value of the readline comment-begin variable is inserted at the beginning of the current line. If a numeric argument is supplied, this command acts as a toggle: if the characters at the beginning of the line do not match the value of comment-begin, the value is inserted, otherwise the characters in comment-begin are deleted from the beginning of the line. In either case, the line is accepted as if a newline had been typed. The default value of comment-begin causes this command to make the current line a shell comment. If a numeric argument causes the comment character to be removed, the line will be executed by the shell.
-glob-complete-word (M-g)
-The word before point is treated as a pattern for pathname expansion, with an asterisk implicitly appended. This pattern is used to generate a list of matching file names for possible completions.
-glob-expand-word (C-x *)
-The word before point is treated as a pattern for pathname expansion, and the list of matching file names is inserted, replacing the word. If a numeric argument is supplied, an asterisk is appended before pathname expansion.
-glob-list-expansions (C-x g)
-The list of expansions that would have been generated by glob-expand-word is displayed, and the line is redrawn. If a numeric argument is supplied, an asterisk is appended before pathname expansion.
-dump-functions
+\subsection{Miscellaneous}\label{sec:miscellaneous}
+\begin{longtable}\defaultlongtable
+re-read-init-file (C-x C-r) &
+Read in the contents of the inputrc file, and incorporate any bindings or variable assignments found there.\\
+
+abort (C-g) &
+Abort the current editing command and ring the terminal's bell (subject to the setting of bell-style). \\
+
+\multicolumn{2}{l}{do-uppercase-version (M-a, M-b, M-x, ...)} \\* &
+If the metafied character x is lowercase, run the command that is bound to the corresponding uppercase character. \\
+
+prefix-meta (ESC) &
+Metafy the next character typed. ESC f is equivalent to Meta-f. \\
+
+undo (C-\_, C-x C-u) &
+Incremental undo, separately remembered for each line. \\
+
+revert-line (M-r) &
+Undo all changes made to this line. This is like executing the undo command enough times to return the line to its initial state. \\
+
+tilde-expand (M\&) &
+Perform tilde expansion on the current word. \\
+
+set-mark (C-@, M-<space>) &
+Set the mark to the point. If a numeric argument is supplied, the mark is set to that position. \\
+
+\multicolumn{2}{l}{exchange-point-and-mark (C-x C-x)} \\* &
+Swap the point with the mark. The current cursor position is set to the saved position, and the old cursor position is saved as the mark. \\
+
+character-search (C-]) &
+A character is read and point is moved to the next occurrence of that character. A negative count searches for previous occurrences. \\
+
+\multicolumn{2}{l}{character-search-backward (M-C-])} \\* &
+A character is read and point is moved to the previous occurrence of that character. A negative count searches for subsequent occurrences. \\
+
+skip-csi-sequence () &
+Read enough characters to consume a multi-key sequence such as those defined for keys like Home and End. Such sequences begin with a Control Sequence Indicator (CSI), usually ESC-[. If this sequence is bound to "\textbackslash[", keys producing such sequences will have no effect unless explicitly bound to a readline command, instead of inserting stray characters into the editing buffer. This is unbound by default, but usually bound to ESC-[. \\
+
+insert-comment (M-\#) &
+Without a numeric argument, the value of the readline comment-begin variable is inserted at the beginning of the current line. If a numeric argument is supplied, this command acts as a toggle: if the characters at the beginning of the line do not match the value of comment-begin, the value is inserted, otherwise the characters in comment-begin are deleted from the beginning of the line. In either case, the line is accepted as if a newline had been typed. The default value of comment-begin causes this command to make the current line a shell comment. If a numeric argument causes the comment character to be removed, the line will be executed by the shell. \\
+
+glob-complete-word (M-g) &
+The word before point is treated as a pattern for pathname expansion, with an asterisk implicitly appended. This pattern is used to generate a list of matching file names for possible completions. \\
+
+glob-expand-word (C-x *) &
+The word before point is treated as a pattern for pathname expansion, and the list of matching file names is inserted, replacing the word. If a numeric argument is supplied, an asterisk is appended before pathname expansion. \\
+
+glob-list-expansions (C-x g) &
+The list of expansions that would have been generated by glob-expand-word is displayed, and the line is redrawn. If a numeric argument is supplied, an asterisk is appended before pathname expansion. \\
+
+dump-functions &
 Print all of the functions and their key bindings to the readline output stream. If a numeric argument is supplied, the output is formatted in such a way that it can be made part of an inputrc file.
 dump-variables
-Print all of the settable readline variables and their values to the readline output stream. If a numeric argument is supplied, the output is formatted in such a way that it can be made part of an inputrc file.
-dump-macros
-Print all of the readline key sequences bound to macros and the strings they output. If a numeric argument is supplied, the output is formatted in such a way that it can be made part of an inputrc file.
-display-shell-version (C-x C-v)
-Display version information about the current instance of bash.
-Programmable Completion
+
+Print all of the settable readline variables and their values to the readline output stream. If a numeric argument is supplied, the output is formatted in such a way that it can be made part of an inputrc file. \\
+dump-macros &
+Print all of the readline key sequences bound to macros and the strings they output. If a numeric argument is supplied, the output is formatted in such a way that it can be made part of an inputrc file. \\
+
+display-shell-version (C-x C-v) &
+Display version information about the current instance of bash. \\
+\end{longtable}
+
+\subsection{Programmable Completion}\label{sec:programmablecompletion}
 
 When word completion is attempted for an argument to a command for which a completion specification (a compspec) has been defined using the complete builtin \hyperref[sec:shellbuiltincommands]{see SHELL BUILTIN COMMANDS below)}, the programmable completion facilities are invoked.
 First, the command name is identified. If the command word is the empty string (completion attempted at the beginning of an empty line), any compspec defined with the -E option to complete is used. If a compspec has been defined for that command, the compspec is used to generate the list of possible completions for the word. If the command word is a full pathname, a compspec for the full pathname is searched for first. If no compspec is found for the full pathname, an attempt is made to find a compspec for the portion following the final slash. If those searches to not result in a compspec, any compspec defined with the -D option to complete is used as the default.
@@ -475,13 +500,10 @@ There is some support for dynamically modifying completions. This is most useful
 For instance, assuming that there is a library of compspecs, each kept in a file corresponding to the name of the command, the following default completion function would load completions dynamically:
 
 \begin{lstlisting}
-
-
-\_completion\_loader()
-{
-
-. "/etc/bash\_completion.d/\$1.sh" >/dev/null 2\&1\&\& return 124
-}
-\end{lstlisting}
-
-complete -D -F \_completion\_loader
+    _completion_loader()
+    {
+    
+    . "/etc/bash_completion.d/$1.sh" >/dev/null 2>&1 && return 124
+    }
+    complete -D -F _completion_loader
+\end{lstlisting} %stupid overleaf syntax highlighting error here. Thankfully end of page.
